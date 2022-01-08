@@ -1,0 +1,94 @@
+Criando o container para o PostgreSQL
+#####################################
+
+docker run --name postgresql_olap -e POSTGRES_PASSWORD=airflow -d postgres
+
+Conectando ao container olap
+############################
+
+docker container exec -it postgresql_olap bash
+
+Conectando ao PostgreSQL
+########################
+
+psql -h localhost -U postgres
+
+
+####################################################################################################
+
+feliciani@LAPTOP-V176DRSL:/mnt/e/projetos/Stack_Academy/airflow$ docker run --name postgresql_olap -e POSTGRES_PASSWORD=airflow -d postgres
+Unable to find image 'postgres:latest' locally
+latest: Pulling from library/postgres
+eff15d958d66: Pull complete
+de2b4ab3ade5: Pull complete
+108afa831d95: Pull complete
+29f36a620c9a: Pull complete
+5c78220cdd7f: Pull complete
+c7fc8d555476: Pull complete
+6cf6f19a1e0f: Pull complete
+5367c2439241: Pull complete
+a12007c4788d: Pull complete
+81199e3badc7: Pull complete
+408765abd042: Pull complete
+4d7cce8750cb: Pull complete
+5546007dbbe5: Pull complete
+Digest: sha256:b8c0e3bc0ceb19d3d52d64ca5ddea34705f2202141d956cbba957a8b070008d9
+Status: Downloaded newer image for postgres:latest
+73cb4337569737eb6e653877f592c53fa473e4bbe3707f94b917180afe6594e8
+
+
+feliciani@LAPTOP-V176DRSL:/mnt/e/projetos/Stack_Academy/airflow$ docker container exec -it postgresql_olap bash  ####### Entrei no container
+
+root@73cb43375697:/# psql -h localhost -U postgres ############## Entrei no PostgreSQL
+psql (14.1 (Debian 14.1-1.pgdg110+1))
+Type "help" for help.
+
+postgres=# \l
+                                 List of databases
+   Name    |  Owner   | Encoding |  Collate   |   Ctype    |   Access privileges
+-----------+----------+----------+------------+------------+-----------------------
+ postgres  | postgres | UTF8     | en_US.utf8 | en_US.utf8 |
+ template0 | postgres | UTF8     | en_US.utf8 | en_US.utf8 | =c/postgres          +
+           |          |          |            |            | postgres=CTc/postgres
+ template1 | postgres | UTF8     | en_US.utf8 | en_US.utf8 | =c/postgres          +
+           |          |          |            |            | postgres=CTc/postgres
+(3 rows)
+
+postgres=# SELECT datname FROM pg_database;
+  datname
+-----------
+ postgres
+ template1
+ template0
+(3 rows)
+
+postgres=# CREATE DATABASE employees; #################################################### DATABASE criada para a CARGA DO AIRFLOW
+CREATE DATABASE
+postgres=# \l
+                                 List of databases
+   Name    |  Owner   | Encoding |  Collate   |   Ctype    |   Access privileges
+-----------+----------+----------+------------+------------+-----------------------
+ employees | postgres | UTF8     | en_US.utf8 | en_US.utf8 |
+ postgres  | postgres | UTF8     | en_US.utf8 | en_US.utf8 |
+ template0 | postgres | UTF8     | en_US.utf8 | en_US.utf8 | =c/postgres          +
+           |          |          |            |            | postgres=CTc/postgres
+ template1 | postgres | UTF8     | en_US.utf8 | en_US.utf8 | =c/postgres          +
+           |          |          |            |            | postgres=CTc/postgres
+(4 rows)
+
+postgres=#
+postgres=# SELECT datname FROM pg_database;
+  datname
+-----------
+ postgres
+ employees
+ template1
+ template0
+(4 rows)
+
+postgres=#
+
+postgres=# \q
+root@73cb43375697:/#
+exit
+

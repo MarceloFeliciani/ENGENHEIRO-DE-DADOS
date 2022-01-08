@@ -1,0 +1,39 @@
+
+BAIXANDO O CONTAINER DO MYSQL
+#############################
+
+feliciani@LAPTOP-V176DRSL:/mnt/e/projetos/Stack_Academy/airflow$ docker run -d --name mysql_oltp -p "3306:3306" -v "$PWD/data:/home" -e MYSQL_ROOT_PASSWORD=airflow mysql
+Unable to find image 'mysql:latest' locally
+/usr/bin/docker-credential-desktop.exe: Invalid argument
+latest: Pulling from library/mysql
+a10c77af2613: Pull complete
+b76a7eb51ffd: Pull complete
+258223f927e4: Pull complete
+2d2c75386df9: Pull complete
+63e92e4046c9: Pull complete
+f5845c731544: Pull complete
+bd0401123a9b: Pull complete
+3ef07ec35f1a: Pull complete
+c93a31315089: Pull complete
+3349ed800d44: Pull complete
+6d01857ca4c1: Pull complete
+4cc13890eda8: Pull complete
+Digest: sha256:aeecae58035f3868bf4f00e5fc623630d8b438db9d05f4d8c6538deb14d4c31b
+Status: Downloaded newer image for mysql:latest
+1906ecc8a9ee6cddfb0dcab883cd1f27912540a1ad3c5cddfe72b2fbd8099544
+feliciani@LAPTOP-V176DRSL:/mnt/e/projetos/Stack_Academy/airflow$
+
+###############################################################
+
+SE DER O AVISO DE QUE A PORTA 3306 JÁ ESTÁ EM USO, DESCOBRIR O PID QUE USANDO A PORTA E EXECUTAR
+kill 123 (por exemplo, pid 123)
+
+###############################################################
+
+feliciani@LAPTOP-V176DRSL:/mnt/e/projetos/Stack_Academy/airflow$ docker ps
+CONTAINER ID   IMAGE                            COMMAND                  CREATED         STATUS             PORTS                               NAMES
+1906ecc8a9ee   mysql                            "docker-entrypoint.s…"   6 minutes ago   Up 5 minutes       0.0.0.0:3306->3306/tcp, 33060/tcp   mysql_oltp
+9c6fd9a3ac5c   apache/airflow:2.1.1-python3.8   "/bin/bash -c '(airf…"   26 hours ago    Up About an hour   0.0.0.0:8080->8080/tcp              airflow
+7e52417ffdfc   fjardim/mongo                    "docker-entrypoint.s…"   4 months ago    Up 2 hours         0.0.0.0:27017->27017/tcp            mongo
+8857f2bbd8d4   fjardim/mongo-express            "tini -- /docker-ent…"   4 months ago    Up 2 hours         0.0.0.0:8081->8081/tcp              mongo_express
+feliciani@LAPTOP-V176DRSL:/mnt/e/projetos/Stack_Academy/airflow$

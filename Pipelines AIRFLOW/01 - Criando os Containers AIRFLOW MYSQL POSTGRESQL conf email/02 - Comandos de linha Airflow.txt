@@ -1,0 +1,888 @@
+PS E:\projetos\Stack_Academy\airflow> docker container start 9c6fd9a3ac5c
+9c6fd9a3ac5c
+
+root@LAPTOP-V176DRSL:/mnt/e/projetos/Stack_Academy/airflow# docker container exec -it airflow bash
+airflow@9c6fd9a3ac5c:/opt/airflow$ airflow --help
+usage: airflow [-h] GROUP_OR_COMMAND ...
+
+positional arguments:
+  GROUP_OR_COMMAND
+
+    Groups:
+      celery         Celery components
+      config         View configuration
+      connections    Manage connections
+      dags           Manage DAGs
+      db             Database operations
+      jobs           Manage jobs
+      kubernetes     Tools to help run the KubernetesExecutor
+      pools          Manage pools
+      providers      Display providers
+      roles          Manage roles
+      tasks          Manage tasks
+      users          Manage users
+      variables      Manage variables
+
+    Commands:
+      cheat-sheet    Display cheat sheet
+      info           Show information about current Airflow and environment
+      kerberos       Start a kerberos ticket renewer
+      plugins        Dump information about loaded plugins
+      rotate-fernet-key
+                     Rotate encrypted connection credentials and variables
+      scheduler      Start a scheduler instance
+      sync-perm      Update permissions for existing roles and optionally DAGs
+      version        Show the version
+      webserver      Start a Airflow webserver instance
+
+optional arguments:
+  -h, --help         show this help message and exit
+
+
+
+airflow@9c6fd9a3ac5c:/opt/airflow$ airflow info
+
+Apache Airflow
+version                | 2.1.1
+executor               | SequentialExecutor
+task_logging_handler   | airflow.utils.log.file_task_handler.FileTaskHandler
+sql_alchemy_conn       | sqlite:////opt/airflow/airflow.db
+dags_folder            | /opt/airflow/dags
+plugins_folder         | /opt/airflow/plugins
+base_log_folder        | /opt/airflow/logs
+remote_base_log_folder |
+
+
+System info
+OS              | Linux
+architecture    | x86_64
+uname           | uname_result(system='Linux', node='9c6fd9a3ac5c', release='5.10.60.1-microsoft-standard-WSL2', version='#1 SMP Wed Aug 25 23:20:18
+                | UTC 2021', machine='x86_64', processor='')
+locale          | ('en_US', 'UTF-8')
+python_version  | 3.8.10 (default, May 12 2021, 15:56:47)  [GCC 8.3.0]
+python_location | /usr/local/bin/python
+
+
+Tools info
+git             | NOT AVAILABLE
+ssh             | OpenSSH_7.9p1 Debian-10+deb10u2, OpenSSL 1.1.1d  10 Sep 2019
+kubectl         | NOT AVAILABLE
+gcloud          | NOT AVAILABLE
+cloud_sql_proxy | NOT AVAILABLE
+mysql           | mysql  Ver 8.0.25 for Linux on x86_64 (MySQL Community Server - GPL)
+sqlite3         | 3.27.2 2019-02-25 16:06:06 bd49a8271d650fa89e446b42e513b595a717b9212c91dd384aab871fc1d0alt1
+psql            | psql (PostgreSQL) 11.12 (Debian 11.12-0+deb10u1)
+
+
+Paths info
+airflow_home    | /opt/airflow
+system_path     | /home/airflow/.local/bin:/usr/local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+python_path     | /home/airflow/.local/bin:/usr/local/lib/python38.zip:/usr/local/lib/python3.8:/usr/local/lib/python3.8/lib-dynload:/home/airflow/.
+                | local/lib/python3.8/site-packages:/usr/local/lib/python3.8/site-packages:/opt/airflow/dags:/opt/airflow/config:/opt/airflow/plugin
+                | s
+airflow_on_path | True
+
+
+Providers info
+apache-airflow-providers-amazon          | 2.0.0
+apache-airflow-providers-celery          | 2.0.0
+apache-airflow-providers-cncf-kubernetes | 2.0.0
+apache-airflow-providers-docker          | 2.0.0
+apache-airflow-providers-elasticsearch   | 2.0.1
+apache-airflow-providers-ftp             | 2.0.0
+apache-airflow-providers-google          | 4.0.0
+apache-airflow-providers-grpc            | 2.0.0
+apache-airflow-providers-hashicorp       | 2.0.0
+apache-airflow-providers-http            | 2.0.0
+apache-airflow-providers-imap            | 2.0.0
+apache-airflow-providers-microsoft-azure | 3.0.0
+apache-airflow-providers-mysql           | 2.0.0
+apache-airflow-providers-postgres        | 2.0.0
+apache-airflow-providers-redis           | 2.0.0
+apache-airflow-providers-sendgrid        | 2.0.0
+apache-airflow-providers-sftp            | 2.0.0
+apache-airflow-providers-slack           | 4.0.0
+apache-airflow-providers-sqlite          | 2.0.0
+apache-airflow-providers-ssh             | 2.0.0
+
+
+airflow@9c6fd9a3ac5c:/opt/airflow$ airflow config list
+[core]
+dags_folder = /opt/airflow/dags
+hostname_callable = socket.getfqdn
+default_timezone = utc
+executor = SequentialExecutor
+sql_alchemy_conn = sqlite:////opt/airflow/airflow.db
+sql_engine_encoding = utf-8
+sql_alchemy_pool_enabled = True
+sql_alchemy_pool_size = 5
+sql_alchemy_max_overflow = 10
+sql_alchemy_pool_recycle = 1800
+sql_alchemy_pool_pre_ping = True
+sql_alchemy_schema =
+parallelism = 32
+dag_concurrency = 16
+dags_are_paused_at_creation = True
+max_active_runs_per_dag = 16
+load_examples = False
+load_default_connections = True
+plugins_folder = /opt/airflow/plugins
+execute_tasks_new_python_interpreter = False
+fernet_key =
+donot_pickle = True
+dagbag_import_timeout = 30.0
+dagbag_import_error_tracebacks = True
+dagbag_import_error_traceback_depth = 2
+dag_file_processor_timeout = 50
+task_runner = StandardTaskRunner
+default_impersonation =
+security =
+unit_test_mode = False
+enable_xcom_pickling = False
+killed_task_cleanup_time = 60
+dag_run_conf_overrides_params = True
+dag_discovery_safe_mode = True
+default_task_retries = 0
+min_serialized_dag_update_interval = 30
+min_serialized_dag_fetch_interval = 10
+max_num_rendered_ti_fields_per_task = 30
+check_slas = True
+xcom_backend = airflow.models.xcom.BaseXCom
+lazy_load_plugins = True
+lazy_discover_providers = True
+max_db_retries = 3
+hide_sensitive_var_conn_fields = True
+sensitive_var_conn_names =
+
+[logging]
+base_log_folder = /opt/airflow/logs
+remote_logging = False
+remote_log_conn_id =
+google_key_path =
+remote_base_log_folder =
+encrypt_s3_logs = False
+logging_level = INFO
+fab_logging_level = WARN
+logging_config_class =
+colored_console_log = True
+colored_log_format = [%(blue)s%(asctime)s%(reset)s] {%(blue)s%(filename)s:%(reset)s%(lineno)d} %(log_color)s%(levelname)s%(reset)s - %(log_color)s%(message)s%(reset)s
+colored_formatter_class = airflow.utils.log.colored_log.CustomTTYColoredFormatter
+log_format = [%(asctime)s] {%(filename)s:%(lineno)d} %(levelname)s - %(message)s
+simple_log_format = %(asctime)s %(levelname)s - %(message)s
+task_log_prefix_template =
+log_filename_template = {{ ti.dag_id }}/{{ ti.task_id }}/{{ ts }}/{{ try_number }}.log
+log_processor_filename_template = {{ filename }}.log
+dag_processor_manager_log_location = /opt/airflow/logs/dag_processor_manager/dag_processor_manager.log
+task_log_reader = task
+extra_loggers =
+
+[metrics]
+statsd_on = False
+statsd_host = localhost
+statsd_port = 8125
+statsd_prefix = airflow
+statsd_allow_list =
+stat_name_handler =
+statsd_datadog_enabled = False
+statsd_datadog_tags =
+
+[secrets]
+backend =
+backend_kwargs =
+
+[cli]
+api_client = airflow.api.client.local_client
+endpoint_url = http://localhost:8080
+
+[debug]
+fail_fast = False
+
+[api]
+enable_experimental_api = False
+auth_backend = airflow.api.auth.backend.deny_all
+maximum_page_limit = 100
+fallback_page_limit = 100
+google_oauth2_audience =
+google_key_path =
+access_control_allow_headers =
+access_control_allow_methods =
+access_control_allow_origin =
+
+[lineage]
+backend =
+
+[atlas]
+sasl_enabled = False
+host =
+port = 21000
+username =
+password =
+
+[operators]
+default_owner = airflow
+default_cpus = 1
+default_ram = 512
+default_disk = 512
+default_gpus = 0
+default_queue = default
+allow_illegal_arguments = False
+
+[hive]
+default_hive_mapred_queue =
+
+[webserver]
+base_url = http://localhost:8080
+default_ui_timezone = UTC
+web_server_host = 0.0.0.0
+web_server_port = 8080
+web_server_ssl_cert =
+web_server_ssl_key =
+web_server_master_timeout = 120
+web_server_worker_timeout = 120
+worker_refresh_batch_size = 1
+worker_refresh_interval = 6000
+reload_on_plugin_change = False
+secret_key = g2RZKCFCd8V2hNYfrNyARQ==
+workers = 4
+worker_class = sync
+access_logfile = -
+error_logfile = -
+access_logformat =
+expose_config = False
+expose_hostname = True
+expose_stacktrace = True
+dag_default_view = tree
+dag_orientation = LR
+log_fetch_timeout_sec = 5
+log_fetch_delay_sec = 2
+log_auto_tailing_offset = 30
+log_animation_speed = 1000
+hide_paused_dags_by_default = False
+page_size = 100
+navbar_color = #fff
+default_dag_run_display_number = 25
+enable_proxy_fix = False
+proxy_fix_x_for = 1
+proxy_fix_x_proto = 1
+proxy_fix_x_host = 1
+proxy_fix_x_port = 1
+proxy_fix_x_prefix = 1
+cookie_secure = False
+cookie_samesite = Lax
+default_wrap = False
+x_frame_enabled = True
+show_recent_stats_for_completed_runs = True
+update_fab_perms = True
+session_lifetime_minutes = 43200
+
+[email]
+email_backend = airflow.utils.email.send_email_smtp
+email_conn_id = smtp_default
+default_email_on_retry = True
+default_email_on_failure = True
+
+[smtp]
+smtp_host = localhost
+smtp_starttls = True
+smtp_ssl = False
+smtp_port = 25
+smtp_mail_from = airflow@example.com
+smtp_timeout = 30
+smtp_retry_limit = 5
+
+[sentry]
+sentry_on = False
+sentry_dsn =
+
+[celery_kubernetes_executor]
+kubernetes_queue = kubernetes
+
+[celery]
+celery_app_name = airflow.executors.celery_executor
+worker_concurrency = 16
+worker_log_server_port = 8793
+worker_umask = 0o077
+broker_url = redis://redis:6379/0
+result_backend = db+postgresql://postgres:airflow@postgres/airflow
+flower_host = 0.0.0.0
+flower_url_prefix =
+flower_port = 5555
+flower_basic_auth =
+sync_parallelism = 0
+celery_config_options = airflow.config_templates.default_celery.DEFAULT_CELERY_CONFIG
+ssl_active = False
+ssl_key =
+ssl_cert =
+ssl_cacert =
+pool = prefork
+operation_timeout = 1.0
+task_track_started = True
+task_adoption_timeout = 600
+task_publish_max_retries = 3
+worker_precheck = False
+
+[celery_broker_transport_options]
+
+[dask]
+cluster_address = 127.0.0.1:8786
+tls_ca =
+tls_cert =
+tls_key =
+
+[scheduler]
+job_heartbeat_sec = 5
+clean_tis_without_dagrun_interval = 15.0
+scheduler_heartbeat_sec = 5
+num_runs = -1
+processor_poll_interval = 1
+min_file_process_interval = 30
+dag_dir_list_interval = 300
+print_stats_interval = 30
+pool_metrics_interval = 5.0
+scheduler_health_check_threshold = 30
+orphaned_tasks_check_interval = 300.0
+child_process_log_directory = /opt/airflow/logs/scheduler
+scheduler_zombie_task_threshold = 300
+catchup_by_default = True
+max_tis_per_query = 512
+use_row_level_locking = True
+parsing_processes = 2
+file_parsing_sort_mode = modified_time
+use_job_schedule = True
+allow_trigger_in_future = False
+dependency_detector = airflow.serialization.serialized_objects.DependencyDetector
+
+[kerberos]
+ccache = /tmp/airflow_krb5_ccache
+principal = airflow
+reinit_frequency = 3600
+kinit_path = kinit
+keytab = airflow.keytab
+
+[github_enterprise]
+api_rev = v3
+
+[elasticsearch]
+host =
+log_id_template = {dag_id}-{task_id}-{execution_date}-{try_number}
+end_of_log_mark = end_of_log
+frontend =
+write_stdout = False
+json_format = False
+json_fields = asctime, filename, lineno, levelname, message
+host_field = host
+offset_field = offset
+
+[elasticsearch_configs]
+use_ssl = False
+verify_certs = True
+
+[kubernetes]
+pod_template_file =
+worker_container_repository =
+worker_container_tag =
+namespace = default
+delete_worker_pods = True
+delete_worker_pods_on_failure = False
+worker_pods_creation_batch_size = 1
+multi_namespace_mode = False
+in_cluster = True
+kube_client_request_args =
+delete_option_kwargs =
+enable_tcp_keepalive = True
+tcp_keep_idle = 120
+tcp_keep_intvl = 30
+tcp_keep_cnt = 6
+verify_ssl = True
+worker_pods_pending_timeout = 300
+worker_pods_pending_timeout_check_interval = 120
+worker_pods_pending_timeout_batch_size = 100
+
+[smart_sensor]
+use_smart_sensor = False
+shard_code_upper_limit = 10000
+shards = 5
+sensors_enabled = NamedHivePartitionSensor
+
+
+airflow@9c6fd9a3ac5c:/opt/airflow$ airflow connections list
+id | conn_id    | conn_type  | descriptio | host       | schema  | login      | password | port  | is_encrypt | is_extra_e | extra_dej | get_uri
+   |            |            | n          |            |         |            |          |       | ed         | ncrypted   | son       |
+===+============+============+============+============+=========+============+==========+=======+============+============+===========+============
+1  | airflow_db | mysql      | None       | mysql      | airflow | root       | None     | None  | False      | False      | {}        | mysql://roo
+   |            |            |            |            |         |            |          |       |            |            |           | t@mysql/air
+   |            |            |            |            |         |            |          |       |            |            |           | flow
+2  | aws_defaul | aws        | None       | None       | None    | None       | None     | None  | False      | False      | {}        | aws://
+   | t          |            |            |            |         |            |          |       |            |            |           |
+3  | azure_batc | azure_batc | None       | None       | None    | <ACCOUNT_N | None     | None  | False      | False      | {'account | azure-batch
+   | h_default  | h          |            |            |         | AME>       |          |       |            |            | _url': '< | ://%3CACCOU
+   |            |            |            |            |         |            |          |       |            |            | ACCOUNT_U | NT_NAME%3E@
+   |            |            |            |            |         |            |          |       |            |            | RL>'}     | ?account_ur
+   |            |            |            |            |         |            |          |       |            |            |           | l=%3CACCOUN
+   |            |            |            |            |         |            |          |       |            |            |           | T_URL%3E
+4  | azure_cosm | azure_cosm | None       | None       | None    | None       | None     | None  | False      | False      | {'databas | azure-cosmo
+   | os_default | os         |            |            |         |            |          |       |            |            | e_name':  | s://?databa
+   |            |            |            |            |         |            |          |       |            |            | '<DATABAS | se_name=%3C
+   |            |            |            |            |         |            |          |       |            |            | E_NAME>', | DATABASE_NA
+   |            |            |            |            |         |            |          |       |            |            |  'collect | ME%3E&colle
+   |            |            |            |            |         |            |          |       |            |            | ion_name' | ction_name=
+   |            |            |            |            |         |            |          |       |            |            | : '<COLLE | %3CCOLLECTI
+   |            |            |            |            |         |            |          |       |            |            | CTION_NAM | ON_NAME%3E
+   |            |            |            |            |         |            |          |       |            |            | E>'}      |
+5  | azure_data | azure_data | None       | https://<C | None    | None       | None     | None  | False      | False      | {'auth_me | azure-data-
+   | _explorer_ | _explorer  |            | LUSTER>.ku |         |            |          |       |            |            | thod':    | explorer://
+   | default    |            |            | sto.window |         |            |          |       |            |            | '<AAD_APP | https%3A%2F
+   |            |            |            | s.net      |         |            |          |       |            |            | | AAD_APP | %2F%3CCLUST
+   |            |            |            |            |         |            |          |       |            |            | _CERT |   | ER%3E.kusto
+   |            |            |            |            |         |            |          |       |            |            | AAD_CREDS | .windows.ne
+   |            |            |            |            |         |            |          |       |            |            | | AAD_DEV | t?auth_meth
+   |            |            |            |            |         |            |          |       |            |            | ICE>',    | od=%3CAAD_A
+   |            |            |            |            |         |            |          |       |            |            | 'tenant': | PP+%7C+AAD_
+   |            |            |            |            |         |            |          |       |            |            | '<TENANT  | APP_CERT+%7
+   |            |            |            |            |         |            |          |       |            |            | ID>', 'ce | C+AAD_CREDS
+   |            |            |            |            |         |            |          |       |            |            | rtificate | +%7C+AAD_DE
+   |            |            |            |            |         |            |          |       |            |            | ': '<APPL | VICE%3E&ten
+   |            |            |            |            |         |            |          |       |            |            | ICATION   | ant=%3CTENA
+   |            |            |            |            |         |            |          |       |            |            | PEM CERTI | NT+ID%3E&ce
+   |            |            |            |            |         |            |          |       |            |            | FICATE>', | rtificate=%
+   |            |            |            |            |         |            |          |       |            |            |  'thumbpr | 3CAPPLICATI
+   |            |            |            |            |         |            |          |       |            |            | int': '<A | ON+PEM+CERT
+   |            |            |            |            |         |            |          |       |            |            | PPLICATIO | IFICATE%3E&
+   |            |            |            |            |         |            |          |       |            |            | N CERTIFI | thumbprint=
+   |            |            |            |            |         |            |          |       |            |            | CATE THUM | %3CAPPLICAT
+   |            |            |            |            |         |            |          |       |            |            | BPRINT>'} | ION+CERTIFI
+   |            |            |            |            |         |            |          |       |            |            |           | CATE+THUMBP
+   |            |            |            |            |         |            |          |       |            |            |           | RINT%3E
+6  | azure_data | azure_data | None       | None       | None    | None       | None     | None  | False      | False      | {'tenant' | azure-data-
+   | _lake_defa | _lake      |            |            |         |            |          |       |            |            | : '<TENAN | lake://?ten
+   | ult        |            |            |            |         |            |          |       |            |            | T>', 'acc | ant=%3CTENA
+   |            |            |            |            |         |            |          |       |            |            | ount_name | NT%3E&accou
+   |            |            |            |            |         |            |          |       |            |            | ': '<ACCO | nt_name=%3C
+   |            |            |            |            |         |            |          |       |            |            | UNTNAME>' | ACCOUNTNAME
+   |            |            |            |            |         |            |          |       |            |            | }         | %3E
+7  | azure_defa | azure      | None       | None       | None    | None       | None     | None  | False      | False      | {}        | azure://
+   | ult        |            |            |            |         |            |          |       |            |            |           |
+8  | cassandra_ | cassandra  | None       | cassandra  | None    | None       | None     | 9042  | False      | False      | {}        | cassandra:/
+   | default    |            |            |            |         |            |          |       |            |            |           | /cassandra:
+   |            |            |            |            |         |            |          |       |            |            |           | 9042
+9  | databricks | databricks | None       | localhost  | None    | None       | None     | None  | False      | False      | {}        | databricks:
+   | _default   |            |            |            |         |            |          |       |            |            |           | //localhost
+10 | dingding_d | http       | None       |            | None    | None       | None     | None  | False      | False      | {}        | http://
+   | efault     |            |            |            |         |            |          |       |            |            |           |
+11 | druid_brok | druid      | None       | druid-brok | None    | None       | None     | 8082  | False      | False      | {'endpoin | druid://dru
+   | er_default |            |            | er         |         |            |          |       |            |            | t': 'drui | id-broker:8
+   |            |            |            |            |         |            |          |       |            |            | d/v2/sql' | 082?endpoin
+   |            |            |            |            |         |            |          |       |            |            | }         | t=druid%2Fv
+   |            |            |            |            |         |            |          |       |            |            |           | 2%2Fsql
+12 | druid_inge | druid      | None       | druid-over | None    | None       | None     | 8081  | False      | False      | {'endpoin | druid://dru
+   | st_default |            |            | lord       |         |            |          |       |            |            | t': 'drui | id-overlord
+   |            |            |            |            |         |            |          |       |            |            | d/indexer | :8081?endpo
+   |            |            |            |            |         |            |          |       |            |            | /v1/task' | int=druid%2
+   |            |            |            |            |         |            |          |       |            |            | }         | Findexer%2F
+   |            |            |            |            |         |            |          |       |            |            |           | v1%2Ftask
+13 | elasticsea | elasticsea | None       | localhost  | http    | None       | None     | 9200  | False      | False      | {}        | elasticsear
+   | rch_defaul | rch        |            |            |         |            |          |       |            |            |           | ch://localh
+   | t          |            |            |            |         |            |          |       |            |            |           | ost:9200/ht
+   |            |            |            |            |         |            |          |       |            |            |           | tp
+14 | emr_defaul | emr        | None       | None       | None    | None       | None     | None  | False      | False      | {'Name':  | emr://?__ex
+   | t          |            |            |            |         |            |          |       |            |            | 'default_ | tra__=%0A++
+   |            |            |            |            |         |            |          |       |            |            | job_flow_ | +++++++++++
+   |            |            |            |            |         |            |          |       |            |            | name',    | +++%7B+++%2
+   |            |            |            |            |         |            |          |       |            |            | 'LogUri': | 2Name%22%3A
+   |            |            |            |            |         |            |          |       |            |            | 's3://my- | +%22default
+   |            |            |            |            |         |            |          |       |            |            | emr-log-b | _job_flow_n
+   |            |            |            |            |         |            |          |       |            |            | ucket/def | ame%22%2C%0
+   |            |            |            |            |         |            |          |       |            |            | ault_job_ | A++++++++++
+   |            |            |            |            |         |            |          |       |            |            | flow_loca | ++++++++++%
+   |            |            |            |            |         |            |          |       |            |            | tion', 'R | 22LogUri%22
+   |            |            |            |            |         |            |          |       |            |            | eleaseLab | %3A+%22s3%3
+   |            |            |            |            |         |            |          |       |            |            | el': 'emr | A%2F%2Fmy-e
+   |            |            |            |            |         |            |          |       |            |            | -4.6.0',  | mr-log-buck
+   |            |            |            |            |         |            |          |       |            |            | 'Instance | et%2Fdefaul
+   |            |            |            |            |         |            |          |       |            |            | s': {'Ec2 | t_job_flow_
+   |            |            |            |            |         |            |          |       |            |            | KeyName': | location%22
+   |            |            |            |            |         |            |          |       |            |            |  'mykey', | %2C%0A+++++
+   |            |            |            |            |         |            |          |       |            |            | 'Ec2Subne | +++++++++++
+   |            |            |            |            |         |            |          |       |            |            | tId': 'so | ++++%22Rele
+   |            |            |            |            |         |            |          |       |            |            | mesubnet' | aseLabel%22
+   |            |            |            |            |         |            |          |       |            |            | , 'Instan | %3A+%22emr-
+   |            |            |            |            |         |            |          |       |            |            | ceGroups' | 4.6.0%22%2C
+   |            |            |            |            |         |            |          |       |            |            | :         | %0A++++++++
+   |            |            |            |            |         |            |          |       |            |            | [{'Name': | +++++++++++
+   |            |            |            |            |         |            |          |       |            |            | 'Master   | +%22Instanc
+   |            |            |            |            |         |            |          |       |            |            | nodes',   | es%22%3A+%7
+   |            |            |            |            |         |            |          |       |            |            | 'Market': | B%0A+++++++
+   |            |            |            |            |         |            |          |       |            |            | 'ON_DEMAN | +++++++++++
+   |            |            |            |            |         |            |          |       |            |            | D', 'Inst | ++++++%22Ec
+   |            |            |            |            |         |            |          |       |            |            | anceRole' | 2KeyName%22
+   |            |            |            |            |         |            |          |       |            |            | :         | %3A+%22myke
+   |            |            |            |            |         |            |          |       |            |            | 'MASTER', | y%22%2C%0A+
+   |            |            |            |            |         |            |          |       |            |            | 'Instance | +++++++++++
+   |            |            |            |            |         |            |          |       |            |            | Type': 'r | +++++++++++
+   |            |            |            |            |         |            |          |       |            |            | 3.2xlarge | +%22Ec2Subn
+   |            |            |            |            |         |            |          |       |            |            | ', 'Insta | etId%22%3A+
+   |            |            |            |            |         |            |          |       |            |            | nceCount' | %22somesubn
+   |            |            |            |            |         |            |          |       |            |            | : 1},     | et%22%2C%0A
+   |            |            |            |            |         |            |          |       |            |            | {'Name':  | +++++++++++
+   |            |            |            |            |         |            |          |       |            |            | 'Slave    | +++++++++++
+   |            |            |            |            |         |            |          |       |            |            | nodes',   | ++%22Instan
+   |            |            |            |            |         |            |          |       |            |            | 'Market': | ceGroups%22
+   |            |            |            |            |         |            |          |       |            |            | 'ON_DEMAN | %3A+%5B%0A+
+   |            |            |            |            |         |            |          |       |            |            | D', 'Inst | +++++++++++
+   |            |            |            |            |         |            |          |       |            |            | anceRole' | +++++++++++
+   |            |            |            |            |         |            |          |       |            |            | : 'CORE', | +++++%7B%0A
+   |            |            |            |            |         |            |          |       |            |            | 'Instance | +++++++++++
+   |            |            |            |            |         |            |          |       |            |            | Type': 'r | +++++++++++
+   |            |            |            |            |         |            |          |       |            |            | 3.2xlarge | ++++++++++%
+   |            |            |            |            |         |            |          |       |            |            | ', 'Insta | 22Name%22%3
+   |            |            |            |            |         |            |          |       |            |            | nceCount' | A+%22Master
+   |            |            |            |            |         |            |          |       |            |            | : 1}], 'T | +nodes%22%2
+   |            |            |            |            |         |            |          |       |            |            | erminatio | C%0A+++++++
+   |            |            |            |            |         |            |          |       |            |            | nProtecte | +++++++++++
+   |            |            |            |            |         |            |          |       |            |            | d':       | +++++++++++
+   |            |            |            |            |         |            |          |       |            |            | False, 'K | +++%22Marke
+   |            |            |            |            |         |            |          |       |            |            | eepJobFlo | t%22%3A+%22
+   |            |            |            |            |         |            |          |       |            |            | wAliveWhe | ON_DEMAND%2
+   |            |            |            |            |         |            |          |       |            |            | nNoSteps' | 2%2C%0A++++
+   |            |            |            |            |         |            |          |       |            |            | : False}, | +++++++++++
+   |            |            |            |            |         |            |          |       |            |            | 'Applicat | +++++++++++
+   |            |            |            |            |         |            |          |       |            |            | ions':    | ++++++%22In
+   |            |            |            |            |         |            |          |       |            |            | [{'Name': | stanceRole%
+   |            |            |            |            |         |            |          |       |            |            | 'Spark'}] | 22%3A+%22MA
+   |            |            |            |            |         |            |          |       |            |            | , 'Visibl | STER%22%2C%
+   |            |            |            |            |         |            |          |       |            |            | eToAllUse | 0A+++++++++
+   |            |            |            |            |         |            |          |       |            |            | rs':      | +++++++++++
+   |            |            |            |            |         |            |          |       |            |            | True, 'Jo | +++++++++++
+   |            |            |            |            |         |            |          |       |            |            | bFlowRole | +%22Instanc
+   |            |            |            |            |         |            |          |       |            |            | ': 'EMR_E | eType%22%3A
+   |            |            |            |            |         |            |          |       |            |            | C2_Defaul | +%22r3.2xla
+   |            |            |            |            |         |            |          |       |            |            | tRole', ' | rge%22%2C%0
+   |            |            |            |            |         |            |          |       |            |            | ServiceRo | A++++++++++
+   |            |            |            |            |         |            |          |       |            |            | le': 'EMR | +++++++++++
+   |            |            |            |            |         |            |          |       |            |            | _DefaultR | +++++++++++
+   |            |            |            |            |         |            |          |       |            |            | ole',     | %22Instance
+   |            |            |            |            |         |            |          |       |            |            | 'Tags':   | Count%22%3A
+   |            |            |            |            |         |            |          |       |            |            | [{'Key':  | +1%0A++++++
+   |            |            |            |            |         |            |          |       |            |            | 'app',    | +++++++++++
+   |            |            |            |            |         |            |          |       |            |            | 'Value':  | +++++++++++
+   |            |            |            |            |         |            |          |       |            |            | 'analytic | %7D%2C%0A++
+   |            |            |            |            |         |            |          |       |            |            | s'},      | +++++++++++
+   |            |            |            |            |         |            |          |       |            |            | {'Key': ' | +++++++++++
+   |            |            |            |            |         |            |          |       |            |            | environme | ++++%7B%0A+
+   |            |            |            |            |         |            |          |       |            |            | nt',      | +++++++++++
+   |            |            |            |            |         |            |          |       |            |            | 'Value':  | +++++++++++
+   |            |            |            |            |         |            |          |       |            |            | 'developm | +++++++++%2
+   |            |            |            |            |         |            |          |       |            |            | ent'}]}   | 2Name%22%3A
+   |            |            |            |            |         |            |          |       |            |            |           | +%22Slave+n
+   |            |            |            |            |         |            |          |       |            |            |           | odes%22%2C%
+   |            |            |            |            |         |            |          |       |            |            |           | 0A+++++++++
+   |            |            |            |            |         |            |          |       |            |            |           | +++++++++++
+   |            |            |            |            |         |            |          |       |            |            |           | +++++++++++
+   |            |            |            |            |         |            |          |       |            |            |           | +%22Market%
+   |            |            |            |            |         |            |          |       |            |            |           | 22%3A+%22ON
+   |            |            |            |            |         |            |          |       |            |            |           | _DEMAND%22%
+   |            |            |            |            |         |            |          |       |            |            |           | 2C%0A++++++
+   |            |            |            |            |         |            |          |       |            |            |           | +++++++++++
+   |            |            |            |            |         |            |          |       |            |            |           | +++++++++++
+   |            |            |            |            |         |            |          |       |            |            |           | ++++%22Inst
+   |            |            |            |            |         |            |          |       |            |            |           | anceRole%22
+   |            |            |            |            |         |            |          |       |            |            |           | %3A+%22CORE
+   |            |            |            |            |         |            |          |       |            |            |           | %22%2C%0A++
+   |            |            |            |            |         |            |          |       |            |            |           | +++++++++++
+   |            |            |            |            |         |            |          |       |            |            |           | +++++++++++
+   |            |            |            |            |         |            |          |       |            |            |           | ++++++++%22
+   |            |            |            |            |         |            |          |       |            |            |           | InstanceTyp
+   |            |            |            |            |         |            |          |       |            |            |           | e%22%3A+%22
+   |            |            |            |            |         |            |          |       |            |            |           | r3.2xlarge%
+   |            |            |            |            |         |            |          |       |            |            |           | 22%2C%0A+++
+   |            |            |            |            |         |            |          |       |            |            |           | +++++++++++
+   |            |            |            |            |         |            |          |       |            |            |           | +++++++++++
+   |            |            |            |            |         |            |          |       |            |            |           | +++++++%22I
+   |            |            |            |            |         |            |          |       |            |            |           | nstanceCoun
+   |            |            |            |            |         |            |          |       |            |            |           | t%22%3A+1%0
+   |            |            |            |            |         |            |          |       |            |            |           | A++++++++++
+   |            |            |            |            |         |            |          |       |            |            |           | +++++++++++
+   |            |            |            |            |         |            |          |       |            |            |           | +++++++%7D%
+   |            |            |            |            |         |            |          |       |            |            |           | 0A+++++++++
+   |            |            |            |            |         |            |          |       |            |            |           | +++++++++++
+   |            |            |            |            |         |            |          |       |            |            |           | ++++%5D%2C%
+   |            |            |            |            |         |            |          |       |            |            |           | 0A+++++++++
+   |            |            |            |            |         |            |          |       |            |            |           | +++++++++++
+   |            |            |            |            |         |            |          |       |            |            |           | ++++%22Term
+   |            |            |            |            |         |            |          |       |            |            |           | inationProt
+   |            |            |            |            |         |            |          |       |            |            |           | ected%22%3A
+   |            |            |            |            |         |            |          |       |            |            |           | +false%2C%0
+   |            |            |            |            |         |            |          |       |            |            |           | A++++++++++
+   |            |            |            |            |         |            |          |       |            |            |           | +++++++++++
+   |            |            |            |            |         |            |          |       |            |            |           | +++%22KeepJ
+   |            |            |            |            |         |            |          |       |            |            |           | obFlowAlive
+   |            |            |            |            |         |            |          |       |            |            |           | WhenNoSteps
+   |            |            |            |            |         |            |          |       |            |            |           | %22%3A+fals
+   |            |            |            |            |         |            |          |       |            |            |           | e%0A+++++++
+   |            |            |            |            |         |            |          |       |            |            |           | +++++++++++
+   |            |            |            |            |         |            |          |       |            |            |           | ++%7D%2C%0A
+   |            |            |            |            |         |            |          |       |            |            |           | +++++++++++
+   |            |            |            |            |         |            |          |       |            |            |           | +++++++++%2
+   |            |            |            |            |         |            |          |       |            |            |           | 2Applicatio
+   |            |            |            |            |         |            |          |       |            |            |           | ns%22%3A%5B
+   |            |            |            |            |         |            |          |       |            |            |           | %0A++++++++
+   |            |            |            |            |         |            |          |       |            |            |           | +++++++++++
+   |            |            |            |            |         |            |          |       |            |            |           | +++++%7B+%2
+   |            |            |            |            |         |            |          |       |            |            |           | 2Name%22%3A
+   |            |            |            |            |         |            |          |       |            |            |           | +%22Spark%2
+   |            |            |            |            |         |            |          |       |            |            |           | 2+%7D%0A+++
+   |            |            |            |            |         |            |          |       |            |            |           | +++++++++++
+   |            |            |            |            |         |            |          |       |            |            |           | ++++++%5D%2
+   |            |            |            |            |         |            |          |       |            |            |           | C%0A+++++++
+   |            |            |            |            |         |            |          |       |            |            |           | +++++++++++
+   |            |            |            |            |         |            |          |       |            |            |           | ++%22Visibl
+   |            |            |            |            |         |            |          |       |            |            |           | eToAllUsers
+   |            |            |            |            |         |            |          |       |            |            |           | %22%3A+true
+   |            |            |            |            |         |            |          |       |            |            |           | %2C%0A+++++
+   |            |            |            |            |         |            |          |       |            |            |           | +++++++++++
+   |            |            |            |            |         |            |          |       |            |            |           | ++++%22JobF
+   |            |            |            |            |         |            |          |       |            |            |           | lowRole%22%
+   |            |            |            |            |         |            |          |       |            |            |           | 3A+%22EMR_E
+   |            |            |            |            |         |            |          |       |            |            |           | C2_DefaultR
+   |            |            |            |            |         |            |          |       |            |            |           | ole%22%2C%0
+   |            |            |            |            |         |            |          |       |            |            |           | A++++++++++
+   |            |            |            |            |         |            |          |       |            |            |           | ++++++++++%
+   |            |            |            |            |         |            |          |       |            |            |           | 22ServiceRo
+   |            |            |            |            |         |            |          |       |            |            |           | le%22%3A+%2
+   |            |            |            |            |         |            |          |       |            |            |           | 2EMR_Defaul
+   |            |            |            |            |         |            |          |       |            |            |           | tRole%22%2C
+   |            |            |            |            |         |            |          |       |            |            |           | %0A++++++++
+   |            |            |            |            |         |            |          |       |            |            |           | +++++++++++
+   |            |            |            |            |         |            |          |       |            |            |           | +%22Tags%22
+   |            |            |            |            |         |            |          |       |            |            |           | %3A+%5B%0A+
+   |            |            |            |            |         |            |          |       |            |            |           | +++++++++++
+   |            |            |            |            |         |            |          |       |            |            |           | +++++++++++
+   |            |            |            |            |         |            |          |       |            |            |           | +%7B%0A++++
+   |            |            |            |            |         |            |          |       |            |            |           | +++++++++++
+   |            |            |            |            |         |            |          |       |            |            |           | +++++++++++
+   |            |            |            |            |         |            |          |       |            |            |           | ++%22Key%22
+   |            |            |            |            |         |            |          |       |            |            |           | %3A+%22app%
+   |            |            |            |            |         |            |          |       |            |            |           | 22%2C%0A+++
+   |            |            |            |            |         |            |          |       |            |            |           | +++++++++++
+   |            |            |            |            |         |            |          |       |            |            |           | +++++++++++
+   |            |            |            |            |         |            |          |       |            |            |           | +++%22Value
+   |            |            |            |            |         |            |          |       |            |            |           | %22%3A+%22a
+   |            |            |            |            |         |            |          |       |            |            |           | nalytics%22
+   |            |            |            |            |         |            |          |       |            |            |           | %0A++++++++
+   |            |            |            |            |         |            |          |       |            |            |           | +++++++++++
+   |            |            |            |            |         |            |          |       |            |            |           | +++++%7D%2C
+   |            |            |            |            |         |            |          |       |            |            |           | %0A++++++++
+   |            |            |            |            |         |            |          |       |            |            |           | +++++++++++
+   |            |            |            |            |         |            |          |       |            |            |           | +++++%7B%0A
+   |            |            |            |            |         |            |          |       |            |            |           | +++++++++++
+   |            |            |            |            |         |            |          |       |            |            |           | +++++++++++
+   |            |            |            |            |         |            |          |       |            |            |           | ++++++%22Ke
+   |            |            |            |            |         |            |          |       |            |            |           | y%22%3A+%22
+   |            |            |            |            |         |            |          |       |            |            |           | environment
+   |            |            |            |            |         |            |          |       |            |            |           | %22%2C%0A++
+   |            |            |            |            |         |            |          |       |            |            |           | +++++++++++
+   |            |            |            |            |         |            |          |       |            |            |           | +++++++++++
+   |            |            |            |            |         |            |          |       |            |            |           | ++++%22Valu
+   |            |            |            |            |         |            |          |       |            |            |           | e%22%3A+%22
+   |            |            |            |            |         |            |          |       |            |            |           | development
+   |            |            |            |            |         |            |          |       |            |            |           | %22%0A+++++
+   |            |            |            |            |         |            |          |       |            |            |           | +++++++++++
+   |            |            |            |            |         |            |          |       |            |            |           | ++++++++%7D
+   |            |            |            |            |         |            |          |       |            |            |           | %0A++++++++
+   |            |            |            |            |         |            |          |       |            |            |           | +++++++++++
+   |            |            |            |            |         |            |          |       |            |            |           | +%5D%0A++++
+   |            |            |            |            |         |            |          |       |            |            |           | +++++++++++
+   |            |            |            |            |         |            |          |       |            |            |           | +%7D%0A++++
+   |            |            |            |            |         |            |          |       |            |            |           | ++++++++
+15 | facebook_d | facebook_s | None       | None       | None    | None       | None     | None  | False      | False      | {'account | facebook-so
+   | efault     | ocial      |            |            |         |            |          |       |            |            | _id': '<A | cial://?acc
+   |            |            |            |            |         |            |          |       |            |            | D_ACCOUNT | ount_id=%3C
+   |            |            |            |            |         |            |          |       |            |            | _ID>',    | AD_ACCOUNT_
+   |            |            |            |            |         |            |          |       |            |            | 'app_id': | ID%3E&app_i
+   |            |            |            |            |         |            |          |       |            |            | '<FACEBOO | d=%3CFACEBO
+   |            |            |            |            |         |            |          |       |            |            | K_APP_ID> | OK_APP_ID%3
+   |            |            |            |            |         |            |          |       |            |            | ', 'app_s | E&app_secre
+   |            |            |            |            |         |            |          |       |            |            | ecret': ' | t=%3CFACEBO
+   |            |            |            |            |         |            |          |       |            |            | <FACEBOOK | OK_APP_SECR
+   |            |            |            |            |         |            |          |       |            |            | _APP_SECR | ET%3E&acces
+   |            |            |            |            |         |            |          |       |            |            | ET>', 'ac | s_token=%3C
+   |            |            |            |            |         |            |          |       |            |            | cess_toke | FACEBOOK_AD
+   |            |            |            |            |         |            |          |       |            |            | n': '<FAC | _ACCESS_TOK
+   |            |            |            |            |         |            |          |       |            |            | EBOOK_AD_ | EN%3E
+   |            |            |            |            |         |            |          |       |            |            | ACCESS_TO |
+   |            |            |            |            |         |            |          |       |            |            | KEN>'}    |
+16 | fs_default | fs         | None       | None       | None    | None       | None     | None  | False      | False      | {'path':  | fs://?path=
+   |            |            |            |            |         |            |          |       |            |            | '/'}      | %2F
+17 | google_clo | google_clo | None       | None       | default | None       | None     | None  | False      | False      | {}        | google-clou
+   | ud_default | ud_platfor |            |            |         |            |          |       |            |            |           | d-platform:
+   |            | m          |            |            |         |            |          |       |            |            |           | ///default
+18 | hive_cli_d | hive_cli   | None       | localhost  | default | None       | None     | 10000 | False      | False      | {'use_bee | hive-cli://
+   | efault     |            |            |            |         |            |          |       |            |            | line':    | localhost:1
+   |            |            |            |            |         |            |          |       |            |            | True,     | 0000/defaul
+   |            |            |            |            |         |            |          |       |            |            | 'auth':   | t?__extra__
+   |            |            |            |            |         |            |          |       |            |            | ''}       | =%7B%22use_
+   |            |            |            |            |         |            |          |       |            |            |           | beeline%22%
+   |            |            |            |            |         |            |          |       |            |            |           | 3A+true%2C+
+   |            |            |            |            |         |            |          |       |            |            |           | %22auth%22%
+   |            |            |            |            |         |            |          |       |            |            |           | 3A+%22%22%7
+   |            |            |            |            |         |            |          |       |            |            |           | D
+19 | hiveserver | hiveserver | None       | localhost  | default | None       | None     | 10000 | False      | False      | {}        | hiveserver2
+   | 2_default  | 2          |            |            |         |            |          |       |            |            |           | ://localhos
+   |            |            |            |            |         |            |          |       |            |            |           | t:10000/def
+   |            |            |            |            |         |            |          |       |            |            |           | ault
+20 | http_defau | http       | None       | https://ww | None    | None       | None     | None  | False      | False      | {}        | http://http
+   | lt         |            |            | w.httpbin. |         |            |          |       |            |            |           | s%3A%2F%2Fw
+   |            |            |            | org/       |         |            |          |       |            |            |           | ww.httpbin.
+   |            |            |            |            |         |            |          |       |            |            |           | org%2F
+21 | kubernetes | kubernetes | None       | None       | None    | None       | None     | None  | False      | False      | {}        | kubernetes:
+   | _default   |            |            |            |         |            |          |       |            |            |           | //
+22 | kylin_defa | kylin      | None       | localhost  | None    | ADMIN      | KYLIN    | 7070  | False      | False      | {}        | kylin://ADM
+   | ult        |            |            |            |         |            |          |       |            |            |           | IN:KYLIN@lo
+   |            |            |            |            |         |            |          |       |            |            |           | calhost:707
+   |            |            |            |            |         |            |          |       |            |            |           | 0
+23 | leveldb_de | leveldb    | None       | localhost  | None    | None       | None     | None  | False      | False      | {}        | leveldb://l
+   | fault      |            |            |            |         |            |          |       |            |            |           | ocalhost
+24 | livy_defau | livy       | None       | livy       | None    | None       | None     | 8998  | False      | False      | {}        | livy://livy
+   | lt         |            |            |            |         |            |          |       |            |            |           | :8998
+25 | local_mysq | mysql      | None       | localhost  | airflow | airflow    | airflow  | None  | False      | False      | {}        | mysql://air
+   | l          |            |            |            |         |            |          |       |            |            |           | flow:airflo
+   |            |            |            |            |         |            |          |       |            |            |           | w@localhost
+   |            |            |            |            |         |            |          |       |            |            |           | /airflow
+26 | metastore_ | hive_metas | None       | localhost  | None    | None       | None     | 9083  | False      | False      | {'authMec | hive-metast
+   | default    | tore       |            |            |         |            |          |       |            |            | hanism':  | ore://local
+   |            |            |            |            |         |            |          |       |            |            | 'PLAIN'}  | host:9083?a
+   |            |            |            |            |         |            |          |       |            |            |           | uthMechanis
+   |            |            |            |            |         |            |          |       |            |            |           | m=PLAIN
+27 | mongo_defa | mongo      | None       | mongo      | None    | None       | None     | 27017 | False      | False      | {}        | mongo://mon
+   | ult        |            |            |            |         |            |          |       |            |            |           | go:27017
+28 | mssql_defa | mssql      | None       | localhost  | None    | None       | None     | 1433  | False      | False      | {}        | mssql://loc
+   | ult        |            |            |            |         |            |          |       |            |            |           | alhost:1433
+29 | mysql_defa | mysql      | None       | mysql      | airflow | root       | None     | None  | False      | False      | {}        | mysql://roo
+   | ult        |            |            |            |         |            |          |       |            |            |           | t@mysql/air
+   |            |            |            |            |         |            |          |       |            |            |           | flow
+30 | opsgenie_d | http       | None       |            | None    | None       | None     | None  | False      | False      | {}        | http://
+   | efault     |            |            |            |         |            |          |       |            |            |           |
+31 | pig_cli_de | pig_cli    | None       | None       | default | None       | None     | None  | False      | False      | {}        | pig-cli:///
+   | fault      |            |            |            |         |            |          |       |            |            |           | default
+32 | pinot_admi | pinot      | None       | localhost  | None    | None       | None     | 9000  | False      | False      | {}        | pinot://loc
+   | n_default  |            |            |            |         |            |          |       |            |            |           | alhost:9000
+33 | pinot_brok | pinot      | None       | localhost  | None    | None       | None     | 9000  | False      | False      | {'endpoin | pinot://loc
+   | er_default |            |            |            |         |            |          |       |            |            | t':       | alhost:9000
+   |            |            |            |            |         |            |          |       |            |            | '/query', | ?endpoint=%
+   |            |            |            |            |         |            |          |       |            |            | 'schema': | 2Fquery&sch
+   |            |            |            |            |         |            |          |       |            |            | 'http'}   | ema=http
+34 | postgres_d | postgres   | None       | postgres   | airflow | postgres   | airflow  | None  | False      | False      | {}        | postgres://
+   | efault     |            |            |            |         |            |          |       |            |            |           | postgres:ai
+   |            |            |            |            |         |            |          |       |            |            |           | rflow@postg
+   |            |            |            |            |         |            |          |       |            |            |           | res/airflow
+35 | presto_def | presto     | None       | localhost  | hive    | None       | None     | 3400  | False      | False      | {}        | presto://lo
+   | ault       |            |            |            |         |            |          |       |            |            |           | calhost:340
+   |            |            |            |            |         |            |          |       |            |            |           | 0/hive
+36 | qubole_def | qubole     | None       | localhost  | None    | None       | None     | None  | False      | False      | {}        | qubole://lo
+   | ault       |            |            |            |         |            |          |       |            |            |           | calhost
+37 | redis_defa | redis      | None       | redis      | None    | None       | None     | 6379  | False      | False      | {'db': 0} | redis://red
+   | ult        |            |            |            |         |            |          |       |            |            |           | is:6379?__e
+   |            |            |            |            |         |            |          |       |            |            |           | xtra__=%7B%
+   |            |            |            |            |         |            |          |       |            |            |           | 22db%22%3A+
+   |            |            |            |            |         |            |          |       |            |            |           | 0%7D
+38 | segment_de | segment    | None       | None       | None    | None       | None     | None  | False      | False      | {'write_k | segment://?
+   | fault      |            |            |            |         |            |          |       |            |            | ey': 'my- | write_key=m
+   |            |            |            |            |         |            |          |       |            |            | segment-w | y-segment-w
+   |            |            |            |            |         |            |          |       |            |            | rite-key' | rite-key
+   |            |            |            |            |         |            |          |       |            |            | }         |
+39 | sftp_defau | sftp       | None       | localhost  | None    | airflow    | None     | 22    | False      | False      | {'key_fil | sftp://airf
+   | lt         |            |            |            |         |            |          |       |            |            | e': '~/.s | low@localho
+   |            |            |            |            |         |            |          |       |            |            | sh/id_rsa | st:22?__ext
+   |            |            |            |            |         |            |          |       |            |            | ', 'no_ho | ra__=%7B%22
+   |            |            |            |            |         |            |          |       |            |            | st_key_ch | key_file%22
+   |            |            |            |            |         |            |          |       |            |            | eck':     | %3A+%22~%2F
+   |            |            |            |            |         |            |          |       |            |            | True}     | .ssh%2Fid_r
+   |            |            |            |            |         |            |          |       |            |            |           | sa%22%2C+%2
+   |            |            |            |            |         |            |          |       |            |            |           | 2no_host_ke
+   |            |            |            |            |         |            |          |       |            |            |           | y_check%22%
+   |            |            |            |            |         |            |          |       |            |            |           | 3A+true%7D
+40 | spark_defa | spark      | None       | yarn       | None    | None       | None     | None  | False      | False      | {'queue': | spark://yar
+   | ult        |            |            |            |         |            |          |       |            |            | 'root.def | n?queue=roo
+   |            |            |            |            |         |            |          |       |            |            | ault'}    | t.default
+41 | sqlite_def | sqlite     | None       | /tmp/sqlit | None    | None       | None     | None  | False      | False      | {}        | sqlite://%2
+   | ault       |            |            | e_default. |         |            |          |       |            |            |           | Ftmp%2Fsqli
+   |            |            |            | db         |         |            |          |       |            |            |           | te_default.
+   |            |            |            |            |         |            |          |       |            |            |           | db
+42 | sqoop_defa | sqoop      | None       | rdbms      | None    | None       | None     | None  | False      | False      | {}        | sqoop://rdb
+   | ult        |            |            |            |         |            |          |       |            |            |           | ms
+43 | ssh_defaul | ssh        | None       | localhost  | None    | None       | None     | None  | False      | False      | {}        | ssh://local
+   | t          |            |            |            |         |            |          |       |            |            |           | host
+44 | tableau_de | tableau    | None       | https://ta | None    | user       | password | None  | False      | False      | {'site_id | tableau://u
+   | fault      |            |            | bleau.serv |         |            |          |       |            |            | ': 'my_si | ser:passwor
+   |            |            |            | er.url     |         |            |          |       |            |            | te'}      | d@https%3A%
+   |            |            |            |            |         |            |          |       |            |            |           | 2F%2Ftablea
+   |            |            |            |            |         |            |          |       |            |            |           | u.server.ur
+   |            |            |            |            |         |            |          |       |            |            |           | l?site_id=m
+   |            |            |            |            |         |            |          |       |            |            |           | y_site
+45 | trino_defa | trino      | None       | localhost  | hive    | None       | None     | 3400  | False      | False      | {}        | trino://loc
+   | ult        |            |            |            |         |            |          |       |            |            |           | alhost:3400
+   |            |            |            |            |         |            |          |       |            |            |           | /hive
+46 | vertica_de | vertica    | None       | localhost  | None    | None       | None     | 5433  | False      | False      | {}        | vertica://l
+   | fault      |            |            |            |         |            |          |       |            |            |           | ocalhost:54
+   |            |            |            |            |         |            |          |       |            |            |           | 33
+47 | wasb_defau | wasb       | None       | None       | None    | None       | None     | None  | False      | False      | {'sas_tok | wasb://?__e
+   | lt         |            |            |            |         |            |          |       |            |            | en':      | xtra__=%7B%
+   |            |            |            |            |         |            |          |       |            |            | None}     | 22sas_token
+   |            |            |            |            |         |            |          |       |            |            |           | %22%3A+null
+   |            |            |            |            |         |            |          |       |            |            |           | %7D
+48 | webhdfs_de | hdfs       | None       | localhost  | None    | None       | None     | 50070 | False      | False      | {}        | hdfs://loca
+   | fault      |            |            |            |         |            |          |       |            |            |           | lhost:50070
+49 | yandexclou | yandexclou | None       | None       | default | None       | None     | None  | False      | False      | {}        | yandexcloud
+   | d_default  | d          |            |            |         |            |          |       |            |            |           | :///default
+
+
+airflow@9c6fd9a3ac5c:/opt/airflow$ airflow dags list
+dag_id          | filepath         | owner   | paused
+================+==================+=========+=======
+branching-teste | branching.py     | airflow | True
+edge_labels     | edge-labels.py   | airflow | True
+elt-pipeline1   | etl-pipeline1.py | airflow | True
+hello_world     | hello-world.py   | airflow | False
+trigger_rules   | trigger_rules.py | airflow | True
+
+
+airflow@9c6fd9a3ac5c:/opt/airflow$ airflow tasks list branching-teste
+check_acuracy_task
+deploy_task
+get_acuracy_task
+retrain_task
+
+
+airflow@9c6fd9a3ac5c:/opt/airflow$ airflow tasks test hello_world echo_message 2021-07-01
+[2021-11-23 23:01:15,326] {dagbag.py:496} INFO - Filling up the DagBag from /opt/airflow/dags
+[2021-11-23 23:01:15,844] {baseoperator.py:1122} ERROR - scripts/clean.sh
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/models/baseoperator.py", line 1120, in resolve_template_files
+    setattr(self, field, env.loader.get_source(env, content)[0])
+  File "/home/airflow/.local/lib/python3.8/site-packages/jinja2/loaders.py", line 197, in get_source
+    raise TemplateNotFound(template)
+jinja2.exceptions.TemplateNotFound: scripts/clean.sh
+[2021-11-23 23:01:15,888] {taskinstance.py:896} INFO - Dependencies all met for <TaskInstance: hello_world.echo_message 2021-07-01T00:00:00+00:00 [None]>
+[2021-11-23 23:01:15,894] {taskinstance.py:896} INFO - Dependencies all met for <TaskInstance: hello_world.echo_message 2021-07-01T00:00:00+00:00 [None]>
+[2021-11-23 23:01:15,894] {taskinstance.py:1087} INFO -
+--------------------------------------------------------------------------------
+[2021-11-23 23:01:15,894] {taskinstance.py:1088} INFO - Starting attempt 1 of 1
+[2021-11-23 23:01:15,894] {taskinstance.py:1089} INFO -
+--------------------------------------------------------------------------------
+[2021-11-23 23:01:15,895] {taskinstance.py:1107} INFO - Executing <Task(BashOperator): echo_message> on 2021-07-01T00:00:00+00:00
+[2021-11-23 23:01:16,430] {taskinstance.py:1300} INFO - Exporting the following env vars:
+AIRFLOW_CTX_DAG_OWNER=airflow
+AIRFLOW_CTX_DAG_ID=hello_world
+AIRFLOW_CTX_TASK_ID=echo_message
+AIRFLOW_CTX_EXECUTION_DATE=2021-07-01T00:00:00+00:00
+[2021-11-23 23:01:16,433] {subprocess.py:52} INFO - Tmp dir root location:
+ /tmp
+[2021-11-23 23:01:16,435] {subprocess.py:63} INFO - Running command: ['bash', '-c', 'echo Hello World!']
+[2021-11-23 23:01:16,446] {subprocess.py:75} INFO - Output:
+[2021-11-23 23:01:16,449] {subprocess.py:79} INFO - Hello World!
+[2021-11-23 23:01:16,450] {subprocess.py:83} INFO - Command exited with return code 0
+[2021-11-23 23:01:16,615] {taskinstance.py:1204} INFO - Marking task as SUCCESS. dag_id=hello_world, task_id=echo_message, execution_date=20210701T000000, start_date=20211123T230115, end_date=20211123T230116
+
+
+PS E:\projetos\Stack_Academy\airflow> docker container stop 9c6fd9a3ac5c
+9c6fd9a3ac5c

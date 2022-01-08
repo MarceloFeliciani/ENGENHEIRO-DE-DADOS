@@ -1,0 +1,21 @@
+Configurando o envio do email em caso de falha da Carga do AIRFLOW
+##################################################################
+
+feliciani@LAPTOP-V176DRSL:/mnt/e/projetos/Stack_Academy/airflow$ docker container exec -it airflow bash ####### entrando no container do Airflow
+
+airflow@9c6fd9a3ac5c:/opt/airflow$ ls
+
+airflow-webserver.pid  airflow.cfg  airflow.db  dags  logs  webserver_config.py
+
+feliciani@LAPTOP-V176DRSL:/mnt/e/projetos/Stack_Academy/airflow$ docker container exec -it --user root airflow bash   ########### CONECTANDO COM SUPERUSUÁRIO
+
+root@9c6fd9a3ac5c:/opt/airflow# apt-get update && apt-get install vim iputils-ping -y   ############ INSTALANDO O VIM
+
+root@9c6fd9a3ac5c:/opt/airflow# vim airflow.cfg  ################ CONFIGUREI DENTRO ARQUIVO AIRFLOW.CFG OS DADOS DO SMTP
+app.config['MAIL_SERVER']='smtp.mailtrap.io'
+app.config['MAIL_PORT'] = 2525
+app.config['MAIL_USERNAME'] = 'f32588c16ed97f'
+app.config['MAIL_PASSWORD'] = 'd19a173aa92375'
+app.config['MAIL_USE_TLS'] = True
+app.config['MAIL_USE_SSL'] = False
+

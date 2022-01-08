@@ -1,0 +1,306 @@
+Subindo o container do AIRFLOW
+###############################
+PS E:\projetos\Stack_Academy\airflow> docker container start 9c6fd9a3ac5c
+9c6fd9a3ac5c
+
+Parando o container do AIRFLOW
+###############################
+PS E:\projetos\Stack_Academy\airflow> docker container stop 9c6fd9a3ac5c
+9c6fd9a3ac5c
+
+Entrando no Container do AIRFLOW
+################################
+root@LAPTOP-V176DRSL:/mnt/e/projetos/Stack_Academy/airflow# docker container exec -it airflow bash
+airflow@9c6fd9a3ac5c:/opt/airflow$
+
+CTRL + D  -> Sai do container
+
+
+
+
+
+MYSQL
+#####
+
+Subindo o container do MYSQL
+############################
+feliciani@LAPTOP-V176DRSL:/mnt/e/projetos/Stack_Academy/airflow$ docker container start 17603ee04434
+17603ee04434
+
+Parando o container do MYSQL
+############################
+feliciani@LAPTOP-V176DRSL:/mnt/e/projetos/Stack_Academy/airflow$ docker container stop 17603ee04434
+17603ee04434
+
+Entrando no Container do MYSQL
+##############################
+feliciani@LAPTOP-V176DRSL:/mnt/e/projetos/Stack_Academy/airflow$ docker container exec -it mysql_oltp bash
+root@17603ee04434:/#
+
+
+feliciani@LAPTOP-V176DRSL:/mnt/e/projetos/Stack_Academy/airflow$ docker container exec -it mysql_oltp bash
+root@17603ee04434:/# ls -ltr
+total 68
+drwxr-xr-x   2 root root 4096 Oct  3 09:00 boot
+drwxr-xr-x   1 root root 4096 Nov 15 00:00 var
+drwxr-xr-x   1 root root 4096 Nov 15 00:00 usr
+drwxr-xr-x   2 root root 4096 Nov 15 00:00 srv
+drwxr-xr-x   2 root root 4096 Nov 15 00:00 sbin
+drwxr-xr-x   2 root root 4096 Nov 15 00:00 opt
+drwxr-xr-x   2 root root 4096 Nov 15 00:00 mnt
+drwxr-xr-x   2 root root 4096 Nov 15 00:00 media
+drwxr-xr-x   2 root root 4096 Nov 15 00:00 lib64
+drwxr-xr-x   2 root root 4096 Nov 15 00:00 bin
+drwxr-xr-x   1 root root 4096 Nov 17 10:32 lib
+drwxr-xr-x   2 root root 4096 Nov 17 10:33 docker-entrypoint-initdb.d
+drwxr-xr-x   1 root root 4096 Nov 17 10:33 run
+lrwxrwxrwx   1 root root   34 Nov 17 10:33 entrypoint.sh -> usr/local/bin/docker-entrypoint.sh
+drwxrwxrwx   1 1000 1000 4096 Nov 29 22:57 home
+drwxr-xr-x   1 root root 4096 Nov 29 23:19 etc
+dr-xr-xr-x  11 root root    0 Nov 29 23:20 sys
+dr-xr-xr-x 225 root root    0 Nov 29 23:20 proc
+drwxr-xr-x   5 root root  340 Nov 29 23:20 dev
+drwxrwxrwt   1 root root 4096 Nov 29 23:27 tmp
+drwx------   1 root root 4096 Nov 29 23:32 root
+
+root@17603ee04434:/# cd home
+
+root@17603ee04434:/home# mysql -uroot -pairflow
+mysql: [Warning] Using a password on the command line interface can be insecure.
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 9
+Server version: 8.0.27 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2021, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql>
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| sys                |
++--------------------+
+4 rows in set (0.00 sec)
+
+mysql> ^DBye
+root@17603ee04434:/home#
+
+root@17603ee04434:/home# cd dbs
+root@17603ee04434:/home/dbs# ls -ltr
+total 168332
+-rwxrwxrwx 1 1000 1000     2013 Sep  7  2020 test_versions.sh
+-rwxrwxrwx 1 1000 1000     4715 Sep  7  2020 test_employees_sha.sql
+-rwxrwxrwx 1 1000 1000     4711 Sep  7  2020 test_employees_md5.sql
+-rwxrwxrwx 1 1000 1000     1800 Sep  7  2020 sql_test.sh
+-rwxrwxrwx 1 1000 1000      272 Sep  7  2020 show_elapsed.sql
+-rwxrwxrwx 1 1000 1000     4568 Sep  7  2020 objects.sql
+-rwxrwxrwx 1 1000 1000 21708736 Sep  7  2020 load_titles.dump
+-rwxrwxrwx 1 1000 1000 39080916 Sep  7  2020 load_salaries3.dump
+-rwxrwxrwx 1 1000 1000 39805981 Sep  7  2020 load_salaries2.dump
+-rwxrwxrwx 1 1000 1000 39806034 Sep  7  2020 load_salaries1.dump
+-rwxrwxrwx 1 1000 1000 17722832 Sep  7  2020 load_employees.dump
+-rwxrwxrwx 1 1000 1000     1090 Sep  7  2020 load_dept_manager.dump
+-rwxrwxrwx 1 1000 1000 14159880 Sep  7  2020 load_dept_emp.dump
+-rwxrwxrwx 1 1000 1000      250 Sep  7  2020 load_departments.dump
+-rwxrwxrwx 1 1000 1000     7948 Sep  7  2020 employees_partitioned_5.1.sql
+-rwxrwxrwx 1 1000 1000     6276 Sep  7  2020 employees_partitioned.sql
+-rwxrwxrwx 1 1000 1000     4193 Sep  7  2020 employees.sql
+-rwxrwxrwx 1 1000 1000     4325 Sep  7  2020 README.md
+-rwxrwxrwx 1 1000 1000      964 Sep  7  2020 Changelog
+drwxrwxrwx 1 1000 1000     4096 Nov 29 22:54 images
+drwxrwxrwx 1 1000 1000     4096 Nov 29 22:54 sakila
+
+
+root@17603ee04434:/home/dbs# apt-get update && apt-get install vim iputils-ping -y  ################# instalando utilitários
+
+
+root@17603ee04434:/home/dbs# cat employees.sql
+--  Sample employee database
+--  See changelog table for details
+--  Copyright (C) 2007,2008, MySQL AB
+--
+--  Original data created by Fusheng Wang and Carlo Zaniolo
+--  http://www.cs.aau.dk/TimeCenter/software.htm
+--  http://www.cs.aau.dk/TimeCenter/Data/employeeTemporalDataSet.zip
+--
+--  Current schema by Giuseppe Maxia
+--  Data conversion from XML to relational by Patrick Crews
+--
+-- This work is licensed under the
+-- Creative Commons Attribution-Share Alike 3.0 Unported License.
+-- To view a copy of this license, visit
+-- http://creativecommons.org/licenses/by-sa/3.0/ or send a letter to
+-- Creative Commons, 171 Second Street, Suite 300, San Francisco,
+-- California, 94105, USA.
+--
+--  DISCLAIMER
+--  To the best of our knowledge, this data is fabricated, and
+--  it does not correspond to real people.
+--  Any similarity to existing people is purely coincidental.
+--
+
+DROP DATABASE IF EXISTS employees;
+CREATE DATABASE IF NOT EXISTS employees;
+USE employees;
+
+SELECT 'CREATING DATABASE STRUCTURE' as 'INFO';
+
+DROP TABLE IF EXISTS dept_emp,
+                     dept_manager,
+                     titles,
+                     salaries,
+                     employees,
+                     departments;
+
+/*!50503 set default_storage_engine = InnoDB */;
+/*!50503 select CONCAT('storage engine: ', @@default_storage_engine) as INFO */;
+
+CREATE TABLE employees (
+    emp_no      INT             NOT NULL,
+    birth_date  DATE            NOT NULL,
+    first_name  VARCHAR(14)     NOT NULL,
+    last_name   VARCHAR(16)     NOT NULL,
+    gender      ENUM ('M','F')  NOT NULL,
+    hire_date   DATE            NOT NULL,
+    PRIMARY KEY (emp_no)
+);
+
+CREATE TABLE departments (
+    dept_no     CHAR(4)         NOT NULL,
+    dept_name   VARCHAR(40)     NOT NULL,
+    PRIMARY KEY (dept_no),
+    UNIQUE  KEY (dept_name)
+);
+
+CREATE TABLE dept_manager (
+   emp_no       INT             NOT NULL,
+   dept_no      CHAR(4)         NOT NULL,
+   from_date    DATE            NOT NULL,
+   to_date      DATE            NOT NULL,
+   FOREIGN KEY (emp_no)  REFERENCES employees (emp_no)    ON DELETE CASCADE,
+   FOREIGN KEY (dept_no) REFERENCES departments (dept_no) ON DELETE CASCADE,
+   PRIMARY KEY (emp_no,dept_no)
+);
+
+CREATE TABLE dept_emp (
+    emp_no      INT             NOT NULL,
+    dept_no     CHAR(4)         NOT NULL,
+    from_date   DATE            NOT NULL,
+    to_date     DATE            NOT NULL,
+    FOREIGN KEY (emp_no)  REFERENCES employees   (emp_no)  ON DELETE CASCADE,
+    FOREIGN KEY (dept_no) REFERENCES departments (dept_no) ON DELETE CASCADE,
+    PRIMARY KEY (emp_no,dept_no)
+);
+
+CREATE TABLE titles (
+    emp_no      INT             NOT NULL,
+    title       VARCHAR(50)     NOT NULL,
+    from_date   DATE            NOT NULL,
+    to_date     DATE,
+    FOREIGN KEY (emp_no) REFERENCES employees (emp_no) ON DELETE CASCADE,
+    PRIMARY KEY (emp_no,title, from_date)
+)
+;
+
+CREATE TABLE salaries (
+    emp_no      INT             NOT NULL,
+    salary      INT             NOT NULL,
+    from_date   DATE            NOT NULL,
+    to_date     DATE            NOT NULL,
+    FOREIGN KEY (emp_no) REFERENCES employees (emp_no) ON DELETE CASCADE,
+    PRIMARY KEY (emp_no, from_date)
+)
+;
+
+CREATE OR REPLACE VIEW dept_emp_latest_date AS
+    SELECT emp_no, MAX(from_date) AS from_date, MAX(to_date) AS to_date
+    FROM dept_emp
+    GROUP BY emp_no;
+
+# shows only the current department for each employee
+CREATE OR REPLACE VIEW current_dept_emp AS
+    SELECT l.emp_no, dept_no, l.from_date, l.to_date
+    FROM dept_emp d
+        INNER JOIN dept_emp_latest_date l
+        ON d.emp_no=l.emp_no AND d.from_date=l.from_date AND l.to_date = d.to_date;
+
+flush /*!50503 binary */ logs;
+
+SELECT 'LOADING departments' as 'INFO';
+source load_departments.dump ;
+SELECT 'LOADING employees' as 'INFO';
+source load_employees.dump ;
+SELECT 'LOADING dept_emp' as 'INFO';
+source load_dept_emp.dump ;
+SELECT 'LOADING dept_manager' as 'INFO';
+source load_dept_manager.dump ;
+SELECT 'LOADING titles' as 'INFO';
+source load_titles.dump ;
+SELECT 'LOADING salaries' as 'INFO';
+source load_salaries1.dump ;
+source load_salaries2.dump ;
+source load_salaries3.dump ;
+
+source show_elapsed.sql ;
+
+
+
+root@17603ee04434:/home/dbs# mysql -uroot -pairflow < employees.sql  ################### carga do dados para dentro do banco de dados MYSQL
+mysql: [Warning] Using a password on the command line interface can be insecure.
+INFO
+CREATING DATABASE STRUCTURE
+INFO
+storage engine: InnoDB
+INFO
+LOADING departments
+INFO
+LOADING employees
+INFO
+LOADING dept_emp
+INFO
+LOADING dept_manager
+INFO
+LOADING titles
+INFO
+LOADING salaries
+data_load_time_diff
+00:09:39
+root@17603ee04434:/home/dbs#
+
+
+root@17603ee04434:/home/dbs# mysql -uroot -pairflow
+mysql: [Warning] Using a password on the command line interface can be insecure.
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 11
+Server version: 8.0.27 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2021, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| employees          |  ########################## CRIADO
+| information_schema |
+| mysql              |
+| performance_schema |
+| sys                |
++--------------------+
+5 rows in set (0.01 sec)
+
+mysql>
