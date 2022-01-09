@@ -1,0 +1,42 @@
+
+feliciani@LAPTOP-V176DRSL:/mnt/e/projetos/Stack_Academy/airflow$ docker container list -a
+CONTAINER ID   IMAGE                            COMMAND                  CREATED        STATUS                        PORTS
+                                                                                       NAMES
+73cb43375697   postgres                         "docker-entrypoint.s…"   5 weeks ago    Exited (0) 5 weeks ago
+                                                                                       postgresql_olap
+17603ee04434   mysql                            "docker-entrypoint.s…"   5 weeks ago    Up 10 minutes                 0.0.0.0:3306->3306/tcp, 33060/tcp                                                                                    mysql_oltp
+9c6fd9a3ac5c   apache/airflow:2.1.1-python3.8   "/bin/bash -c '(airf…"   6 weeks ago    Up 10 minutes                 0.0.0.0:8080->8080/tcp                                                                                               airflow
+b98709c16e2e   fjardim/hive                     "entrypoint.sh /bin/…"   5 months ago   Exited (255) 7 weeks ago      0.0.0.0:10000->10000/tcp, :::10000->10000/tcp, 10002/tcp                                                             hive-server
+9d5e0c87267c   fjardim/hive                     "entrypoint.sh /opt/…"   5 months ago   Exited (255) 7 weeks ago      10000/tcp, 0.0.0.0:9083->9083/tcp, :::9083->9083/tcp, 10002/tcp                                                      hive_metastore
+9356724b972c   fjardim/hive-metastore           "/docker-entrypoint.…"   5 months ago   Exited (255) 7 weeks ago      5432/tcp
+                                                                                       hive-metastore-postgresql
+b771a4a35de2   fjardim/kafkamanager             "kafka-manager-2.0.0…"   5 months ago   Exited (255) 3 months ago
+                                                                                       kafkamanager
+cc7d4c638dd6   fjardim/hbase-master             "/entrypoint.sh /run…"   5 months ago   Exited (255) 7 weeks ago      16000/tcp, 0.0.0.0:16010->16010/tcp, :::16010->16010/tcp                                                             hbase-master
+e3bd661decc9   fjardim/datanode                 "/entrypoint.sh /run…"   5 months ago   Exited (255) 7 weeks ago      0.0.0.0:50075->50075/tcp, :::50075->50075/tcp                                                                        datanode
+66b4f79baca0   fjardim/kafka                    "start-kafka.sh"         5 months ago   Exited (255) 7 weeks ago      0.0.0.0:9092->9092/tcp, :::9092->9092/tcp                                                                            kafka
+4766c25ead04   fjardim/jupyter-spark            "/opt/docker/bin/ent…"   5 months ago   Exited (255) 7 weeks ago      0.0.0.0:4040-4043->4040-4043/tcp, :::4040-4043->4040-4043/tcp, 0.0.0.0:8889->8889/tcp, :::8889->8889/tcp, 8899/tcp   jupyter-spark
+15b55ed572d1   fjardim/namenode_sqoop           "/entrypoint.sh /run…"   5 months ago   Exited (255) 7 weeks ago      0.0.0.0:50070->50070/tcp, :::50070->50070/tcp                                                                        namenode
+09de35148477   fjardim/mysql                    "docker-entrypoint.s…"   5 months ago   Exited (255) 7 weeks ago      33060/tcp, 0.0.0.0:33061->3306/tcp, :::33061->3306/tcp                                                               database
+7e52417ffdfc   fjardim/mongo                    "docker-entrypoint.s…"   5 months ago   Exited (0) 13 minutes ago
+                                                                                       mongo
+b0856dff8a8f   fjardim/zookeeper                "/bin/sh -c '/usr/sb…"   5 months ago   Exited (255) 7 weeks ago      22/tcp, 2888/tcp, 3888/tcp, 0.0.0.0:2181->2181/tcp, :::2181->2181/tcp                                                zookeeper
+8857f2bbd8d4   fjardim/mongo-express            "tini -- /docker-ent…"   5 months ago   Exited (143) 13 minutes ago
+                                                                                       mongo_express
+
+
+feliciani@LAPTOP-V176DRSL:/mnt/e/projetos/Stack_Academy/airflow$ docker container start 9c6fd9a3ac5c
+9c6fd9a3ac5c
+
+feliciani@LAPTOP-V176DRSL:/mnt/e/projetos/Stack_Academy/airflow$ docker container start 17603ee04434
+17603ee04434
+
+feliciani@LAPTOP-V176DRSL:/mnt/e/projetos/Stack_Academy/airflow$ docker container start 73cb43375697
+73cb43375697
+
+
+feliciani@LAPTOP-V176DRSL:/mnt/e/projetos/Stack_Academy/airflow$ docker container list
+CONTAINER ID   IMAGE                            COMMAND                  CREATED       STATUS          PORTS                               NAMES
+73cb43375697   postgres                         "docker-entrypoint.s…"   5 weeks ago   Up 19 seconds   5432/tcp                            postgresql_olap
+17603ee04434   mysql                            "docker-entrypoint.s…"   5 weeks ago   Up 11 minutes   0.0.0.0:3306->3306/tcp, 33060/tcp   mysql_oltp
+9c6fd9a3ac5c   apache/airflow:2.1.1-python3.8   "/bin/bash -c '(airf…"   6 weeks ago   Up 12 minutes   0.0.0.0:8080->8080/tcp              airflow

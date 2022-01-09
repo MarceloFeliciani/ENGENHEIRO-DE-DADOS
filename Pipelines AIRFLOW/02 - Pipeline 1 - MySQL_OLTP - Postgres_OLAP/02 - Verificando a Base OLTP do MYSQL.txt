@@ -1,0 +1,310 @@
+feliciani@LAPTOP-V176DRSL:/mnt/e/projetos/Stack_Academy/airflow$ docker container list
+CONTAINER ID   IMAGE                            COMMAND                  CREATED       STATUS          PORTS                               NAMES
+73cb43375697   postgres                         "docker-entrypoint.s…"   5 weeks ago   Up 19 seconds   5432/tcp                            postgresql_olap
+17603ee04434   mysql                            "docker-entrypoint.s…"   5 weeks ago   Up 11 minutes   0.0.0.0:3306->3306/tcp, 33060/tcp   mysql_oltp
+9c6fd9a3ac5c   apache/airflow:2.1.1-python3.8   "/bin/bash -c '(airf…"   6 weeks ago   Up 12 minutes   0.0.0.0:8080->8080/tcp              airflow
+
+
+feliciani@LAPTOP-V176DRSL:/mnt/e/projetos/Stack_Academy/airflow$ docker inspect mysql_oltp  ##### PEGANDO O IP DO CONTAINER DO MYSQL 172.17.0.3
+[
+    {
+        "Id": "17603ee04434bd6890f2852cd33158ca2c0a85d7c3dd82e18b41a62b853ba095",
+        "Created": "2021-11-29T23:19:58.8720304Z",
+        "Path": "docker-entrypoint.sh",
+        "Args": [
+            "mysqld"
+        ],
+        "State": {
+            "Status": "running",
+            "Running": true,
+            "Paused": false,
+            "Restarting": false,
+            "OOMKilled": false,
+            "Dead": false,
+            "Pid": 1810,
+            "ExitCode": 0,
+            "Error": "",
+            "StartedAt": "2022-01-09T20:04:24.4062072Z",
+            "FinishedAt": "2021-12-02T00:14:37.8724196Z"
+        },
+        "Image": "sha256:b05128b000ddbafb0a0d2713086c6a1cc23280dee3529d37f03c98c97c8cf1ed",
+        "ResolvConfPath": "/var/lib/docker/containers/17603ee04434bd6890f2852cd33158ca2c0a85d7c3dd82e18b41a62b853ba095/resolv.conf",
+        "HostnamePath": "/var/lib/docker/containers/17603ee04434bd6890f2852cd33158ca2c0a85d7c3dd82e18b41a62b853ba095/hostname",
+        "HostsPath": "/var/lib/docker/containers/17603ee04434bd6890f2852cd33158ca2c0a85d7c3dd82e18b41a62b853ba095/hosts",
+        "LogPath": "/var/lib/docker/containers/17603ee04434bd6890f2852cd33158ca2c0a85d7c3dd82e18b41a62b853ba095/17603ee04434bd6890f2852cd33158ca2c0a85d7c3dd82e18b41a62b853ba095-json.log",
+        "Name": "/mysql_oltp",
+        "RestartCount": 0,
+        "Driver": "overlay2",
+        "Platform": "linux",
+        "MountLabel": "",
+        "ProcessLabel": "",
+        "AppArmorProfile": "",
+        "ExecIDs": null,
+        "HostConfig": {
+            "Binds": [
+                "/mnt/e/projetos/Stack_Academy/airflow/data:/home"
+            ],
+            "ContainerIDFile": "",
+            "LogConfig": {
+                "Type": "json-file",
+                "Config": {}
+            },
+            "NetworkMode": "default",
+            "PortBindings": {
+                "3306/tcp": [
+                    {
+                        "HostIp": "",
+                        "HostPort": "3306"
+                    }
+                ]
+            },
+            "RestartPolicy": {
+                "Name": "no",
+                "MaximumRetryCount": 0
+            },
+            "AutoRemove": false,
+            "VolumeDriver": "",
+            "VolumesFrom": null,
+            "CapAdd": null,
+            "CapDrop": null,
+            "CgroupnsMode": "host",
+            "Dns": [],
+            "DnsOptions": [],
+            "DnsSearch": [],
+            "ExtraHosts": null,
+            "GroupAdd": null,
+            "IpcMode": "private",
+            "Cgroup": "",
+            "Links": null,
+            "OomScoreAdj": 0,
+            "PidMode": "",
+            "Privileged": false,
+            "PublishAllPorts": false,
+            "ReadonlyRootfs": false,
+            "SecurityOpt": null,
+            "UTSMode": "",
+            "UsernsMode": "",
+            "ShmSize": 67108864,
+            "Runtime": "runc",
+            "ConsoleSize": [
+                0,
+                0
+            ],
+            "Isolation": "",
+            "CpuShares": 0,
+            "Memory": 0,
+            "NanoCpus": 0,
+            "CgroupParent": "",
+            "BlkioWeight": 0,
+            "BlkioWeightDevice": [],
+            "BlkioDeviceReadBps": null,
+            "BlkioDeviceWriteBps": null,
+            "BlkioDeviceReadIOps": null,
+            "BlkioDeviceWriteIOps": null,
+            "CpuPeriod": 0,
+            "CpuQuota": 0,
+            "CpuRealtimePeriod": 0,
+            "CpuRealtimeRuntime": 0,
+            "CpusetCpus": "",
+            "CpusetMems": "",
+            "Devices": [],
+            "DeviceCgroupRules": null,
+            "DeviceRequests": null,
+            "KernelMemory": 0,
+            "KernelMemoryTCP": 0,
+            "MemoryReservation": 0,
+            "MemorySwap": 0,
+            "MemorySwappiness": null,
+            "OomKillDisable": false,
+            "PidsLimit": null,
+            "Ulimits": null,
+            "CpuCount": 0,
+            "CpuPercent": 0,
+            "IOMaximumIOps": 0,
+            "IOMaximumBandwidth": 0,
+            "MaskedPaths": [
+                "/proc/asound",
+                "/proc/acpi",
+                "/proc/kcore",
+                "/proc/keys",
+                "/proc/latency_stats",
+                "/proc/timer_list",
+                "/proc/timer_stats",
+                "/proc/sched_debug",
+                "/proc/scsi",
+                "/sys/firmware"
+            ],
+            "ReadonlyPaths": [
+                "/proc/bus",
+                "/proc/fs",
+                "/proc/irq",
+                "/proc/sys",
+                "/proc/sysrq-trigger"
+            ]
+        },
+        "GraphDriver": {
+            "Data": {
+                "LowerDir": "/var/lib/docker/overlay2/ee04a0113c60249ed46f508fca2773f7cc27b935bf34c5271d481053aa0f5c63-init/diff:/var/lib/docker/overlay2/856f275da3665f555127ebf4b1af505d3fd5525fd77aa268182eb50eaa5c9a94/diff:/var/lib/docker/overlay2/35563303b9f09acb2dc2fcbfec80a7904a02893f12345730c1425ede6f9944e3/diff:/var/lib/docker/overlay2/bdf5949806436a78d4f4947be927f57a77c73d58d0e9d9583da39b8c34eb7dc2/diff:/var/lib/docker/overlay2/a135a7f096b35c38b917427fec25928875ce68286b47f42c2246a7eaccffa6bb/diff:/var/lib/docker/overlay2/35ce2caf4b75877972302210b6572f1ee4e34734ee9388cb16c97ff44ec55a90/diff:/var/lib/docker/overlay2/cb6ffbf981a9d1e66ee457946cc329f173c659274e6b997034e828d0ee9cb3ce/diff:/var/lib/docker/overlay2/761083dbd8212e296c37bac70d7410c937a2176658cc83f60fa3e82f8cac1798/diff:/var/lib/docker/overlay2/c036dae04b78ab5446b375243d46d76701f54c062828ccb9a4518b2b6d6debf6/diff:/var/lib/docker/overlay2/0102c9b5efbe558d6d2b8045e1689c3a66cd0a21c1ef4897532d8962bbf0a7d7/diff:/var/lib/docker/overlay2/ea7c9f67bd78ce8e26cea4a2a3848bae1a92e7624d121ec2cb5bf16d3cad62d1/diff:/var/lib/docker/overlay2/75c2157ea7ec0e6b5e87cc82c8bbb49397b1032e3a47d4ac7d4f286f03e48145/diff:/var/lib/docker/overlay2/3a3db1cf72dee591153db756f4cd2333013bf31f4620c15498faee80d9cc25b1/diff",
+                "MergedDir": "/var/lib/docker/overlay2/ee04a0113c60249ed46f508fca2773f7cc27b935bf34c5271d481053aa0f5c63/merged",
+                "UpperDir": "/var/lib/docker/overlay2/ee04a0113c60249ed46f508fca2773f7cc27b935bf34c5271d481053aa0f5c63/diff",
+                "WorkDir": "/var/lib/docker/overlay2/ee04a0113c60249ed46f508fca2773f7cc27b935bf34c5271d481053aa0f5c63/work"
+            },
+            "Name": "overlay2"
+        },
+        "Mounts": [
+            {
+                "Type": "bind",
+                "Source": "/mnt/e/projetos/Stack_Academy/airflow/data",
+                "Destination": "/home",
+                "Mode": "",
+                "RW": true,
+                "Propagation": "rprivate"
+            },
+            {
+                "Type": "volume",
+                "Name": "3e292b8a3d263d11606124f6087d901b6dbfd0298f7aeb51d90b9274f8724b0c",
+                "Source": "/var/lib/docker/volumes/3e292b8a3d263d11606124f6087d901b6dbfd0298f7aeb51d90b9274f8724b0c/_data",
+                "Destination": "/var/lib/mysql",
+                "Driver": "local",
+                "Mode": "",
+                "RW": true,
+                "Propagation": ""
+            }
+        ],
+        "Config": {
+            "Hostname": "17603ee04434",
+            "Domainname": "",
+            "User": "",
+            "AttachStdin": false,
+            "AttachStdout": false,
+            "AttachStderr": false,
+            "ExposedPorts": {
+                "3306/tcp": {},
+                "33060/tcp": {}
+            },
+            "Tty": false,
+            "OpenStdin": false,
+            "StdinOnce": false,
+            "Env": [
+                "MYSQL_ROOT_PASSWORD=airflow",
+                "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+                "GOSU_VERSION=1.12",
+                "MYSQL_MAJOR=8.0",
+                "MYSQL_VERSION=8.0.27-1debian10"
+            ],
+            "Cmd": [
+                "mysqld"
+            ],
+            "Image": "mysql",
+            "Volumes": {
+                "/var/lib/mysql": {}
+            },
+            "WorkingDir": "",
+            "Entrypoint": [
+                "docker-entrypoint.sh"
+            ],
+            "OnBuild": null,
+            "Labels": {
+                "desktop.docker.io/wsl-distro": "Ubuntu-20.04"
+            }
+        },
+        "NetworkSettings": {
+            "Bridge": "",
+            "SandboxID": "00c3c66f9ff862432a706a8eb49cbe612282d404f5f169f1c310d2ae01dcb7d4",
+            "HairpinMode": false,
+            "LinkLocalIPv6Address": "",
+            "LinkLocalIPv6PrefixLen": 0,
+            "Ports": {
+                "3306/tcp": [
+                    {
+                        "HostIp": "0.0.0.0",
+                        "HostPort": "3306"
+                    }
+                ],
+                "33060/tcp": null
+            },
+            "SandboxKey": "/var/run/docker/netns/00c3c66f9ff8",
+            "SecondaryIPAddresses": null,
+            "SecondaryIPv6Addresses": null,
+            "EndpointID": "56edea2ed3606e20e33c45982c16a408276c8d34c7c68cfcbf188a0806845796",
+            "Gateway": "172.17.0.1",
+            "GlobalIPv6Address": "",
+            "GlobalIPv6PrefixLen": 0,
+            "IPAddress": "172.17.0.3",
+            "IPPrefixLen": 16,
+            "IPv6Gateway": "",
+            "MacAddress": "02:42:ac:11:00:03",
+            "Networks": {
+                "bridge": {
+                    "IPAMConfig": null,
+                    "Links": null,
+                    "Aliases": null,
+                    "NetworkID": "b56c039baf93605cb756c348c991c7636eafbf2050818280447c8aaf7e5afce9",
+                    "EndpointID": "56edea2ed3606e20e33c45982c16a408276c8d34c7c68cfcbf188a0806845796",
+                    "Gateway": "172.17.0.1",
+                    "IPAddress": "172.17.0.3",
+                    "IPPrefixLen": 16,
+                    "IPv6Gateway": "",
+                    "GlobalIPv6Address": "",
+                    "GlobalIPv6PrefixLen": 0,
+                    "MacAddress": "02:42:ac:11:00:03",
+                    "DriverOpts": null
+                }
+            }
+        }
+    }
+]
+
+
+feliciani@LAPTOP-V176DRSL:/mnt/e/projetos/Stack_Academy/airflow$ docker container exec -it mysql_oltp bash
+root@17603ee04434:/# mysql -uroot -pairflow
+mysql: [Warning] Using a password on the command line interface can be insecure.
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 8
+Server version: 8.0.27 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2021, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| employees          |
+| information_schema |
+| mysql              |
+| performance_schema |
+| sys                |
++--------------------+
+5 rows in set (1.88 sec)
+
+mysql> use employees;
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Database changed
+mysql> select * from employees limit 10;
++--------+------------+------------+-----------+--------+------------+
+| emp_no | birth_date | first_name | last_name | gender | hire_date  |
++--------+------------+------------+-----------+--------+------------+
+|  10001 | 1953-09-02 | Georgi     | Facello   | M      | 1986-06-26 |
+|  10002 | 1964-06-02 | Bezalel    | Simmel    | F      | 1985-11-21 |
+|  10003 | 1959-12-03 | Parto      | Bamford   | M      | 1986-08-28 |
+|  10004 | 1954-05-01 | Chirstian  | Koblick   | M      | 1986-12-01 |
+|  10005 | 1955-01-21 | Kyoichi    | Maliniak  | M      | 1989-09-12 |
+|  10006 | 1953-04-20 | Anneke     | Preusig   | F      | 1989-06-02 |
+|  10007 | 1957-05-23 | Tzvetan    | Zielinski | F      | 1989-02-10 |
+|  10008 | 1958-02-19 | Saniya     | Kalloufi  | M      | 1994-09-15 |
+|  10009 | 1952-04-19 | Sumant     | Peac      | F      | 1985-02-18 |
+|  10010 | 1963-06-01 | Duangkaew  | Piveteau  | F      | 1989-08-24 |
++--------+------------+------------+-----------+--------+------------+
+10 rows in set (0.64 sec)
+
+mysql> ^DBye
+root@17603ee04434:/# exit
+

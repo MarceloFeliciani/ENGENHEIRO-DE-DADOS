@@ -1,0 +1,280 @@
+feliciani@LAPTOP-V176DRSL:/mnt/e/projetos/Stack_Academy/airflow$ docker container list
+CONTAINER ID   IMAGE                            COMMAND                  CREATED       STATUS       PORTS                               NAMES
+73cb43375697   postgres                         "docker-entrypoint.s…"   5 weeks ago   Up 2 hours   5432/tcp                            postgresql_olap
+17603ee04434   mysql                            "docker-entrypoint.s…"   5 weeks ago   Up 2 hours   0.0.0.0:3306->3306/tcp, 33060/tcp   mysql_oltp
+9c6fd9a3ac5c   apache/airflow:2.1.1-python3.8   "/bin/bash -c '(airf…"   6 weeks ago   Up 2 hours   0.0.0.0:8080->8080/tcp              airflow
+
+feliciani@LAPTOP-V176DRSL:/mnt/e/projetos/Stack_Academy/airflow$ docker container exec -it postgresql_olap bash
+root@73cb43375697:/# psql -h localhost -U postgres ############## Entrei no PostgreSQL
+psql (14.1 (Debian 14.1-1.pgdg110+1))
+Type "help" for help.
+
+postgres=# \l
+                                 List of databases
+   Name    |  Owner   | Encoding |  Collate   |   Ctype    |   Access privileges
+-----------+----------+----------+------------+------------+-----------------------
+ postgres  | postgres | UTF8     | en_US.utf8 | en_US.utf8 |
+ template0 | postgres | UTF8     | en_US.utf8 | en_US.utf8 | =c/postgres          +
+           |          |          |            |            | postgres=CTc/postgres
+ template1 | postgres | UTF8     | en_US.utf8 | en_US.utf8 | =c/postgres          +
+           |          |          |            |            | postgres=CTc/postgres
+(3 rows)
+
+postgres=# SELECT datname FROM pg_database;
+  datname
+-----------
+ postgres
+ template1
+ template0
+(3 rows)
+
+postgres=# CREATE DATABASE employees; #################################################### DATABASE criada para a CARGA DO AIRFLOW
+CREATE DATABASE
+postgres=# \l
+                                 List of databases
+   Name    |  Owner   | Encoding |  Collate   |   Ctype    |   Access privileges
+-----------+----------+----------+------------+------------+-----------------------
+ employees | postgres | UTF8     | en_US.utf8 | en_US.utf8 |
+ postgres  | postgres | UTF8     | en_US.utf8 | en_US.utf8 |
+ template0 | postgres | UTF8     | en_US.utf8 | en_US.utf8 | =c/postgres          +
+           |          |          |            |            | postgres=CTc/postgres
+ template1 | postgres | UTF8     | en_US.utf8 | en_US.utf8 | =c/postgres          +
+           |          |          |            |            | postgres=CTc/postgres
+(4 rows)
+
+postgres=# \q
+
+root@73cb43375697:/#
+exit
+
+feliciani@LAPTOP-V176DRSL:/mnt/e/projetos/Stack_Academy/airflow$ docker inspect postgresql_olap
+[
+    {
+        "Id": "73cb4337569737eb6e653877f592c53fa473e4bbe3707f94b917180afe6594e8",
+        "Created": "2021-12-01T23:22:51.0357443Z",
+        "Path": "docker-entrypoint.sh",
+        "Args": [
+            "postgres"
+        ],
+        "State": {
+            "Status": "running",
+            "Running": true,
+            "Paused": false,
+            "Restarting": false,
+            "OOMKilled": false,
+            "Dead": false,
+            "Pid": 2155,
+            "ExitCode": 0,
+            "Error": "",
+            "StartedAt": "2022-01-09T20:16:02.0088786Z",
+            "FinishedAt": "2021-12-02T00:13:20.03545Z"
+        },
+        "Image": "sha256:45bd58729d2450dbf30d680c0168c40f84b657aca3ed0dfbe3dfcfd93ab2260e",
+        "ResolvConfPath": "/var/lib/docker/containers/73cb4337569737eb6e653877f592c53fa473e4bbe3707f94b917180afe6594e8/resolv.conf",
+        "HostnamePath": "/var/lib/docker/containers/73cb4337569737eb6e653877f592c53fa473e4bbe3707f94b917180afe6594e8/hostname",
+        "HostsPath": "/var/lib/docker/containers/73cb4337569737eb6e653877f592c53fa473e4bbe3707f94b917180afe6594e8/hosts",
+        "LogPath": "/var/lib/docker/containers/73cb4337569737eb6e653877f592c53fa473e4bbe3707f94b917180afe6594e8/73cb4337569737eb6e653877f592c53fa473e4bbe3707f94b917180afe6594e8-json.log",
+        "Name": "/postgresql_olap",
+        "RestartCount": 0,
+        "Driver": "overlay2",
+        "Platform": "linux",
+        "MountLabel": "",
+        "ProcessLabel": "",
+        "AppArmorProfile": "",
+        "ExecIDs": null,
+        "HostConfig": {
+            "Binds": null,
+            "ContainerIDFile": "",
+            "LogConfig": {
+                "Type": "json-file",
+                "Config": {}
+            },
+            "NetworkMode": "default",
+            "PortBindings": {},
+            "RestartPolicy": {
+                "Name": "no",
+                "MaximumRetryCount": 0
+            },
+            "AutoRemove": false,
+            "VolumeDriver": "",
+            "VolumesFrom": null,
+            "CapAdd": null,
+            "CapDrop": null,
+            "CgroupnsMode": "host",
+            "Dns": [],
+            "DnsOptions": [],
+            "DnsSearch": [],
+            "ExtraHosts": null,
+            "GroupAdd": null,
+            "IpcMode": "private",
+            "Cgroup": "",
+            "Links": null,
+            "OomScoreAdj": 0,
+            "PidMode": "",
+            "Privileged": false,
+            "PublishAllPorts": false,
+            "ReadonlyRootfs": false,
+            "SecurityOpt": null,
+            "UTSMode": "",
+            "UsernsMode": "",
+            "ShmSize": 67108864,
+            "Runtime": "runc",
+            "ConsoleSize": [
+                0,
+                0
+            ],
+            "Isolation": "",
+            "CpuShares": 0,
+            "Memory": 0,
+            "NanoCpus": 0,
+            "CgroupParent": "",
+            "BlkioWeight": 0,
+            "BlkioWeightDevice": [],
+            "BlkioDeviceReadBps": null,
+            "BlkioDeviceWriteBps": null,
+            "BlkioDeviceReadIOps": null,
+            "BlkioDeviceWriteIOps": null,
+            "CpuPeriod": 0,
+            "CpuQuota": 0,
+            "CpuRealtimePeriod": 0,
+            "CpuRealtimeRuntime": 0,
+            "CpusetCpus": "",
+            "CpusetMems": "",
+            "Devices": [],
+            "DeviceCgroupRules": null,
+            "DeviceRequests": null,
+            "KernelMemory": 0,
+            "KernelMemoryTCP": 0,
+            "MemoryReservation": 0,
+            "MemorySwap": 0,
+            "MemorySwappiness": null,
+            "OomKillDisable": false,
+            "PidsLimit": null,
+            "Ulimits": null,
+            "CpuCount": 0,
+            "CpuPercent": 0,
+            "IOMaximumIOps": 0,
+            "IOMaximumBandwidth": 0,
+            "MaskedPaths": [
+                "/proc/asound",
+                "/proc/acpi",
+                "/proc/kcore",
+                "/proc/keys",
+                "/proc/latency_stats",
+                "/proc/timer_list",
+                "/proc/timer_stats",
+                "/proc/sched_debug",
+                "/proc/scsi",
+                "/sys/firmware"
+            ],
+            "ReadonlyPaths": [
+                "/proc/bus",
+                "/proc/fs",
+                "/proc/irq",
+                "/proc/sys",
+                "/proc/sysrq-trigger"
+            ]
+        },
+        "GraphDriver": {
+            "Data": {
+                "LowerDir": "/var/lib/docker/overlay2/c7e3561235b52b8420469a81f8f1ee7b22b727f9ec07f16d724842a1e0df6d8f-init/diff:/var/lib/docker/overlay2/a83574c29b44e12071105ff929197ae82417200870be114fa5f855b217c5fda1/diff:/var/lib/docker/overlay2/2becbb9b885a266573b238f310f7822dfd0f18563fc380ea34b604fa92446bed/diff:/var/lib/docker/overlay2/6011e82126d698dbf841eae2468bee4aa91ab808a1608d0e02fcefbfe34094e9/diff:/var/lib/docker/overlay2/e10ed598834ed100d83d39bd9f3286a7b1d82dadaf83202d45263fd1a2df9e09/diff:/var/lib/docker/overlay2/2a8ca979656bd8c79dbc6d4d1bfaa42ebb7a07708708c62c4443d4269802eab5/diff:/var/lib/docker/overlay2/419b70744ccea26387f7469206775fe412a6434437188a7adc7e8e2e63a27e7f/diff:/var/lib/docker/overlay2/6f1cae2ee084f17acc1d92846d121e98147a59c998cbbef851854fa06778f50c/diff:/var/lib/docker/overlay2/cc7302ce94ceb9bde7b1a801bd2c3c1bd4a5a425bd640a14d3a5c7dad90540b4/diff:/var/lib/docker/overlay2/31d5f27922ae9c01e8bcb1b0a1b783c73d34798ec36a9a14a5548b3f44bf4cf3/diff:/var/lib/docker/overlay2/da33c4b87753bc68b8d9c861006f1d85850b4efcb651baa4aea7f4ced9d042d9/diff:/var/lib/docker/overlay2/960abfc23cce973a3aa31d6d089bf26b65be6b7d6165c8e697d89ef7e785c0f4/diff:/var/lib/docker/overlay2/5ee62d9d6c84fbfdff70cd070a01298c1ba74908273625cd91dc74a69a014fc5/diff:/var/lib/docker/overlay2/d5d898481a2b785b8039462c70f6b51f07e3c96fd0e1815d0e78e6bca25d5604/diff",
+                "MergedDir": "/var/lib/docker/overlay2/c7e3561235b52b8420469a81f8f1ee7b22b727f9ec07f16d724842a1e0df6d8f/merged",
+                "UpperDir": "/var/lib/docker/overlay2/c7e3561235b52b8420469a81f8f1ee7b22b727f9ec07f16d724842a1e0df6d8f/diff",
+                "WorkDir": "/var/lib/docker/overlay2/c7e3561235b52b8420469a81f8f1ee7b22b727f9ec07f16d724842a1e0df6d8f/work"
+            },
+            "Name": "overlay2"
+        },
+        "Mounts": [
+            {
+                "Type": "volume",
+                "Name": "6fdbdd7ba7c909059a498805bafe9a36255bc84ca2f7c3af623e1cad5c78484b",
+                "Source": "/var/lib/docker/volumes/6fdbdd7ba7c909059a498805bafe9a36255bc84ca2f7c3af623e1cad5c78484b/_data",
+                "Destination": "/var/lib/postgresql/data",
+                "Driver": "local",
+                "Mode": "",
+                "RW": true,
+                "Propagation": ""
+            }
+        ],
+        "Config": {
+            "Hostname": "73cb43375697",
+            "Domainname": "",
+            "User": "",
+            "AttachStdin": false,
+            "AttachStdout": false,
+            "AttachStderr": false,
+            "ExposedPorts": {
+                "5432/tcp": {}
+            },
+            "Tty": false,
+            "OpenStdin": false,
+            "StdinOnce": false,
+            "Env": [
+                "POSTGRES_PASSWORD=airflow",
+                "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/lib/postgresql/14/bin",
+                "GOSU_VERSION=1.14",
+                "LANG=en_US.utf8",
+                "PG_MAJOR=14",
+                "PG_VERSION=14.1-1.pgdg110+1",
+                "PGDATA=/var/lib/postgresql/data"
+            ],
+            "Cmd": [
+                "postgres"
+            ],
+            "Image": "postgres",
+            "Volumes": {
+                "/var/lib/postgresql/data": {}
+            },
+            "WorkingDir": "",
+            "Entrypoint": [
+                "docker-entrypoint.sh"
+            ],
+            "OnBuild": null,
+            "Labels": {
+                "desktop.docker.io/wsl-distro": "Ubuntu-20.04"
+            },
+            "StopSignal": "SIGINT"
+        },
+        "NetworkSettings": {
+            "Bridge": "",
+            "SandboxID": "b9ab173af4ea494a4495b2754db9b3a64a9e6a18085542a212325949e8b17ebc",
+            "HairpinMode": false,
+            "LinkLocalIPv6Address": "",
+            "LinkLocalIPv6PrefixLen": 0,
+            "Ports": {
+                "5432/tcp": null
+            },
+            "SandboxKey": "/var/run/docker/netns/b9ab173af4ea",
+            "SecondaryIPAddresses": null,
+            "SecondaryIPv6Addresses": null,
+            "EndpointID": "acd43ccca5870a5bc811e6ae72a18100976028120cb5f766d7e1ae63b3a2c55c",
+            "Gateway": "172.17.0.1",
+            "GlobalIPv6Address": "",
+            "GlobalIPv6PrefixLen": 0,
+            "IPAddress": "172.17.0.4",
+            "IPPrefixLen": 16,
+            "IPv6Gateway": "",
+            "MacAddress": "02:42:ac:11:00:04",
+            "Networks": {
+                "bridge": {
+                    "IPAMConfig": null,
+                    "Links": null,
+                    "Aliases": null,
+                    "NetworkID": "b56c039baf93605cb756c348c991c7636eafbf2050818280447c8aaf7e5afce9",
+                    "EndpointID": "acd43ccca5870a5bc811e6ae72a18100976028120cb5f766d7e1ae63b3a2c55c",
+                    "Gateway": "172.17.0.1",
+                    "IPAddress": "172.17.0.4",
+                    "IPPrefixLen": 16,
+                    "IPv6Gateway": "",
+                    "GlobalIPv6Address": "",
+                    "GlobalIPv6PrefixLen": 0,
+                    "MacAddress": "02:42:ac:11:00:04",
+                    "DriverOpts": null
+                }
+            }
+        }
+    }
+]
+
+
+feliciani@LAPTOP-V176DRSL:/mnt/e/projetos/Stack_Academy/airflow$

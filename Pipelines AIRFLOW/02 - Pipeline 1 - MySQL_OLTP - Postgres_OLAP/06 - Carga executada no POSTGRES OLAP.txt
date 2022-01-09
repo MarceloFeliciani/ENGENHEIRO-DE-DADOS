@@ -1,0 +1,46 @@
+feliciani@LAPTOP-V176DRSL:/mnt/e/projetos/Stack_Academy/airflow/dags$ docker container exec -it postgresql_olap bash
+root@73cb43375697:/# psql -U postgres
+psql (14.1 (Debian 14.1-1.pgdg110+1))
+Type "help" for help.
+
+postgres=# \l
+                                 List of databases
+   Name    |  Owner   | Encoding |  Collate   |   Ctype    |   Access privileges
+-----------+----------+----------+------------+------------+-----------------------
+ employees | postgres | UTF8     | en_US.utf8 | en_US.utf8 |
+ postgres  | postgres | UTF8     | en_US.utf8 | en_US.utf8 |
+ template0 | postgres | UTF8     | en_US.utf8 | en_US.utf8 | =c/postgres          +
+           |          |          |            |            | postgres=CTc/postgres
+ template1 | postgres | UTF8     | en_US.utf8 | en_US.utf8 | =c/postgres          +
+           |          |          |            |            | postgres=CTc/postgres
+(4 rows)
+
+postgres=# \c employees
+You are now connected to database "employees" as user "postgres".
+employees=#
+employees=# select count(*) from employees_dataset; #################################### TABELA CRIADA E COM OS DADOS DO EMPLOYEES DO MYSQL.
+ count
+-------
+  1000
+(1 row)
+
+employees=# select * from employees_dataset limit 10;
+ salary |      title      |       name
+--------+-----------------+-------------------
+  88958 | Senior Engineer | Georgi Facello
+  72527 | Staff           | Bezalel Simmel
+  43699 | Senior Engineer | Parto Bamford
+  74057 | Engineer        | Chirstian Koblick
+  74057 | Senior Engineer | Chirstian Koblick
+  94692 | Senior Staff    | Kyoichi Maliniak
+  94692 | Staff           | Kyoichi Maliniak
+  60098 | Senior Engineer | Anneke Preusig
+  88070 | Senior Staff    | Tzvetan Zielinski
+  88070 | Staff           | Tzvetan Zielinski
+(10 rows)
+
+employees=#\q
+
+root@73cb43375697:/#
+exit
+feliciani@LAPTOP-V176DRSL:/mnt/e/projetos/Stack_Academy/airflow/dags$
