@@ -6,3 +6,4 @@ Desenvolvendo as habilidades de engenheiro de dados trabalhando com Big Data
 - PYSPARK
 - SQL
 - AIRFLOW
+- NiFi
