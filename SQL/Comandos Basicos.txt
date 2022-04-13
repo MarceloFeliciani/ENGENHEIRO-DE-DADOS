@@ -1,0 +1,88 @@
+select * from RH.funcionarios limit 5   /* limitando apenas 5 itens na consultas para nao travar o banco
+
+select distinct * from RH.funcionarios /* mostra dados nao repetidos, cuidar para nao travar o banco se a consulta for muito grande
+
+select distinct numero_filhos from RH.funcionarios /* valores distintos da coluna numero_filhos
+
+select * from RH.funcionarios where idade = 30 /* somente funcionarios com 30 anos
+
+select count(*) from RH.funcionarios  /* total de linhas da tabela
+
+select count(*) from RH.funcionarios where idade = 40 /* total de funcionarios com idade igual a 40
+
+select count(*) from RH.funcionarios where idade != 40  /* total de funcionarios com a idade diferente de 40
+
+select count(*) from RH.funcionarios where idade > 40  /* total de funcionarios com idade maior que 40
+
+select count(*) from RH.funcionarios where idade >= 40 /* total de funcionarios com idade maior ou igual a 40
+
+select count(*) from RH.funcionarios where idade <= 40 /* total de funcionarios com idade menor ou igual a 40
+
+select count(*) from RH.funcionarios where idade < 40 /* total de funcionarios com idade menor que 40
+
+select * from RH.funcionarios where idade < 30 and estado_civil = 'casado' /* usando AND
+
+select * from RH.funcionarios where idade < 30 or estado_civil = 'viuvo' /* usando OR
+
+select * from RH.funcionarios where idade > 30 and idade < 35  /* idades entre 31 e 34
+
+select * from RH.funcionarios where idade between 30 and 35  /* inclusive 30 e 35
+
+select * from RH.funcionarios where grau_instrucao like '%medio'  /* tudo que contiver a palavra medio na string
+
+select * from RH.funcionarios where grau_instrucao like 'medio%'  /* tudo que iniciar com medio
+
+select * from RH.funcionarios where grau_instrucao like '%medio%'  /* tudo que vier antes ou depois com a palavra medio
+
+select * from RH.funcionarios where idade in (20,30,40,50)  /* lista funcionários com idades somente 20, 30, 40, 50
+
+select * from RH.funcionarios where numero_filhos is null  /* lista valores nulos 
+
+select * from RH.funcionarios where numero_filhos is not null  /* lista valores não nulos
+
+update RH.funcionarios 
+set numero_filhos = null 
+where numero_filhos = 'NA' /* Passando valores NA (em branco) para null (nulos)
+
+commit /* para gravar
+
+select * from RH.funcionarios where numero_filhos is null  /* lista valores null
+
+delete from RH.funcionarios where numero_filhos = 'NA'  /* deletando os SOMENTE campos NA
+commit;
+
+INSERT INTO RH.funcionarios(id, estado_civil, grau_instrucao, numero_filhos, salario_hora, idade, reg_procedencia) VALUES (38, 'casado', 'ensino medio', 3, 4.50, 30, 'capital') /* inserindo 1 registro
+
+select * from RH.funcionarios order by salario_hora /* ordenando o menor para o maior salario na coluna salario_hora
+
+select * from RH.funcionarios order by salario_hora asc  /* do menor salario para o maior, igualmente acima
+
+select * from RH.funcionarios order by salario_hora desc  /* agora do maior salario para o menor
+
+select * from RH.funcionarios order by salario_hora desc, reg_procedencia desc /* salario decrescente e reg_procedencia decrescente
+
+select min(salario_hora), max(salario_hora), avg(salario_hora), count(*), sum(salario_hora) from RH.funcionarios /* menor, maior, média, quantidade e soma de salario_hora
+
+select avg(salario_hora), reg_procedencia from RH.funcionarios group by reg_procedencia  /* média de cada item da coluna reg_procedencia
+
+select round(avg(salario_hora)), reg_procedencia from RH.funcionarios group by reg_procedencia  /* round fará o arredondamento, sem vírgula
+
+select round(avg(salario_hora)), grau_instrucao from RH.funcionarios group by grau_instrucao /* round fará o arredondamento, sem vírgula
+
+
+/* Crie uma instrução SQL que retorne a média de idade, número de filhos e grau de instrução dos funcionários cujo
+salario_hora estiver acima da média de todos os funcionários.
+Retorne os dados somente de funcionários da capital e estado civil casado, com ordem decrente da média de idade
+
+select round(avg(idade)), numero_filhos, grau_instrucao
+from RH.funcionarios
+where reg_procedencia = 'capital' and estado_civil = 'casado' and salario_hora > (select avg(salario_hora) from RH.funcionarios)
+group by numero_filhos, grau_instrucao
+order by round(avg(idade)) desc
+
+
+select * from RH.funcionarios where numero_filhos = 2  /* Retorne todos os registros de funcionários com 2 filhos
+
+
+truncate table RH.funcionarios /* apaga os registros da tabela
+
